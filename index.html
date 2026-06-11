@@ -2473,12 +2473,120 @@ Passo 5: Se não responder em 7 dias do follow-up — encerre esse lead no Linke
 <script>
 function printModule(btn) {
   const module = btn.closest('.module');
-  module.classList.add('printing');
-  window.print();
-  window.addEventListener('afterprint', function handler() {
-    module.classList.remove('printing');
-    window.removeEventListener('afterprint', handler);
-  });
+  const content = module.innerHTML;
+
+  const win = window.open('', '_blank');
+  win.document.write(`
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+      <meta charset="UTF-8">
+      <title>Lune Co. — Módulo</title>
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+      <style>
+        :root {
+          --ink: #0e0d0b; --paper: #f7f4ef; --gold: #b89a5a; --gold-light: #d4b97a;
+          --cream: #ede8df; --muted: #7a756c; --rule: #d4cfc6; --accent-dark: #1a1815;
+          --white: #ffffff; --tag-bg: #e8e3d8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #fff; color: var(--ink); font-size: 16px; line-height: 1.7; padding: 2rem; -webkit-font-smoothing: antialiased; }
+        .print-btn, .module-eyebrow button { display: none !important; }
+        .module-eyebrow { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .module-num { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; }
+        .module-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; padding: 0.2rem 0.6rem; background: var(--tag-bg); color: var(--muted); border-radius: 2px; }
+        .module-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
+        .module-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+        .module-title em { font-style: italic; color: var(--gold); }
+        .module-intro { font-size: 1rem; color: var(--muted); line-height: 1.7; }
+        .section { margin-bottom: 2.5rem; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule); }
+        .section-text { font-size: 0.95rem; line-height: 1.8; color: #2a2825; margin-bottom: 1rem; }
+        .quote { border-left: 3px solid var(--gold); padding: 1.25rem 1.75rem; margin: 2rem 0; background: var(--cream); }
+        .quote p { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-style: italic; line-height: 1.6; }
+        .cards-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.25rem 0; }
+        .card { background: var(--cream); padding: 1.25rem; border-radius: 4px; border: 1px solid var(--rule); }
+        .card-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+        .card-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.4rem; }
+        .card-text { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+        .steps { margin: 1.25rem 0; }
+        .step { display: grid; grid-template-columns: 2.5rem 1fr; gap: 1rem; margin-bottom: 1.25rem; align-items: start; }
+        .step-num { width: 2.5rem; height: 2.5rem; background: var(--ink); color: var(--paper); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .step-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.3rem; }
+        .step-text { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+        .callout { padding: 1rem 1.25rem; border-radius: 4px; margin: 1.25rem 0; font-size: 0.875rem; line-height: 1.65; }
+        .callout strong { display: block; margin-bottom: 0.3rem; }
+        .callout-tip { background: #edf7ed; border-left: 3px solid #4caf50; }
+        .callout-warn { background: #fff8e1; border-left: 3px solid #ff9800; }
+        .callout-info { background: #e8f4fd; border-left: 3px solid #2196f3; }
+        .callout-gold { background: var(--cream); border-left: 3px solid var(--gold); }
+        .callout-dark { background: var(--accent-dark); color: var(--paper); border-left: 3px solid var(--gold); }
+        .callout-dark strong { color: var(--gold-light); }
+        .script-block { background: var(--accent-dark); border-radius: 6px; padding: 1.5rem; margin: 1rem 0; }
+        .script-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+        .script-text { font-size: 0.875rem; color: rgba(255,255,255,0.85); line-height: 1.8; white-space: pre-line; }
+        .script-text strong { color: var(--gold-light); }
+        .table-wrap { overflow-x: auto; margin: 1.25rem 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th { background: var(--ink); color: var(--paper); padding: 0.65rem 0.9rem; text-align: left; font-weight: 500; font-size: 0.78rem; }
+        td { padding: 0.65rem 0.9rem; border-bottom: 1px solid var(--rule); vertical-align: top; line-height: 1.5; }
+        tr:nth-child(even) td { background: var(--cream); }
+        .checklist { list-style: none; margin: 0.75rem 0; }
+        .checklist li { display: flex; align-items: flex-start; gap: 0.65rem; padding: 0.5rem 0; border-bottom: 1px solid var(--rule); font-size: 0.875rem; line-height: 1.5; }
+        .checklist li::before { content: '☐'; color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+        .funnel { margin: 1.5rem 0; display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
+        .funnel-step { display: flex; width: 100%; max-width: 500px; }
+        .funnel-bar { flex: 1; padding: 0.75rem 1rem; display: flex; justify-content: space-between; align-items: center; border-radius: 3px; font-size: 0.85rem; font-weight: 500; }
+        .funnel-bar span:last-child { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; opacity: 0.75; }
+        .f1 { background: #1a1815; color: #fff; width: 100%; }
+        .f2 { background: #2d2a26; color: #fff; width: 85%; margin: 0 auto; }
+        .f3 { background: #3f3b35; color: #fff; width: 70%; margin: 0 auto; }
+        .f4 { background: #b89a5a; color: #fff; width: 55%; margin: 0 auto; }
+        .f5 { background: #d4b97a; color: var(--ink); width: 40%; margin: 0 auto; }
+        .cadence { margin: 1.25rem 0; }
+        .cadence-item { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; margin-bottom: 0; position: relative; }
+        .cadence-item::before { content: ''; position: absolute; left: 1.4rem; top: 2.5rem; bottom: -0.5rem; width: 1px; background: var(--rule); }
+        .cadence-item:last-child::before { display: none; }
+        .cadence-day { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 500; color: var(--white); background: var(--gold); border-radius: 50%; width: 2.8rem; height: 2.8rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-align: center; line-height: 1.2; }
+        .cadence-content { padding: 0.5rem 0 1.75rem; }
+        .cadence-label { font-weight: 600; font-size: 0.875rem; margin-bottom: 0.25rem; }
+        .cadence-text { font-size: 0.825rem; color: var(--muted); font-style: italic; line-height: 1.6; }
+        .playbook-section { border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; margin: 1.5rem 0; }
+        .playbook-header { background: var(--ink); padding: 1rem 1.25rem; display: flex; align-items: center; gap: 0.75rem; }
+        .playbook-header-num { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--gold); border: 1px solid var(--gold); padding: 0.15rem 0.4rem; border-radius: 2px; }
+        .playbook-header-title { font-weight: 600; color: var(--white); font-size: 0.9rem; }
+        .playbook-body { padding: 1.25rem; background: var(--paper); }
+        .takeaways { background: var(--accent-dark); border-radius: 6px; padding: 1.75rem; margin-top: 2.5rem; }
+        .takeaways-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+        .takeaways-list { list-style: none; }
+        .takeaways-list li { padding: 0.65rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.875rem; color: rgba(255,255,255,0.8); line-height: 1.6; display: flex; gap: 0.65rem; }
+        .takeaways-list li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
+        .takeaways-list li:last-child { border-bottom: none; }
+        .activity { background: #f0ebe0; border: 1px solid var(--gold); border-radius: 6px; padding: 1.75rem; margin-top: 2.5rem; }
+        .activity-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+        .activity-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.65rem; }
+        .activity-text { font-size: 0.875rem; line-height: 1.7; color: #2a2825; margin-bottom: 0.75rem; }
+        .activity ul { list-style: none; padding: 0; }
+        .activity ul li { padding: 0.35rem 0; font-size: 0.85rem; display: flex; gap: 0.5rem; }
+        .activity ul li::before { content: '✦'; color: var(--gold); flex-shrink: 0; }
+        .case-study { background: var(--cream); border-radius: 6px; padding: 1.75rem; margin: 1.5rem 0; border-left: 3px solid var(--gold); }
+        .case-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.65rem; }
+        .case-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.75rem; }
+        .case-results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0; }
+        .case-metric { text-align: center; }
+        .case-metric-num { font-family: 'Playfair Display', serif; font-size: 1.75rem; font-weight: 700; color: var(--gold); display: block; }
+        .case-metric-label { font-size: 0.7rem; color: var(--muted); line-height: 1.4; }
+        h4 { font-weight: 600; font-size: 0.9rem; margin: 1.25rem 0 0.5rem; }
+        .divider { border: none; border-top: 1px solid var(--rule); margin: 2rem 0; }
+        .tag-inline { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; background: var(--tag-bg); padding: 0.15rem 0.5rem; border-radius: 2px; color: var(--muted); }
+      </style>
+    </head>
+    <body>${content}</body>
+    </html>
+  `);
+  win.document.close();
+  win.focus();
+  setTimeout(() => { win.print(); }, 800);
 }
 </script>
 </body>
