@@ -1,0 +1,2471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Método Comercial — Lune Co.</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --ink: #0e0d0b;
+    --paper: #f7f4ef;
+    --gold: #b89a5a;
+    --gold-light: #d4b97a;
+    --cream: #ede8df;
+    --muted: #7a756c;
+    --rule: #d4cfc6;
+    --accent-dark: #1a1815;
+    --white: #ffffff;
+    --tag-bg: #e8e3d8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── CAPA ── */
+  .cover {
+    min-height: 100vh;
+    background: var(--accent-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 480px; height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,154,90,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .cover-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 0 2rem;
+  }
+
+  .cover-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 2rem;
+  }
+
+  .cover-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .cover-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+    max-width: 480px;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+  }
+
+  .cover-modules {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .cover-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid rgba(184,154,90,0.3);
+    color: rgba(255,255,255,0.5);
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+  }
+
+  .cover-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .cover-footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+  }
+
+  .cover-footer-brand span { font-style: italic; }
+
+  .cover-footer-info {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.3);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* ── SUMÁRIO ── */
+  .toc {
+    background: var(--cream);
+    padding: 5rem 3rem;
+  }
+
+  .toc-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .toc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .toc-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .toc-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+    line-height: 1.2;
+  }
+
+  .toc-list { list-style: none; }
+
+  .toc-list li {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .toc-list a {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    text-decoration: none;
+    color: var(--ink);
+    transition: color 0.2s;
+  }
+
+  .toc-list a:hover { color: var(--gold); }
+
+  .toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    min-width: 2rem;
+  }
+
+  .toc-title {
+    font-size: 1rem;
+    font-weight: 500;
+    flex: 1;
+  }
+
+  .toc-sub {
+    font-size: 0.8rem;
+    color: var(--muted);
+    display: none;
+  }
+
+  @media (min-width: 600px) { .toc-sub { display: block; } }
+
+  /* ── MÓDULO WRAPPER ── */
+  .module {
+    padding: 5rem 2rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .module:nth-child(odd) { background: var(--paper); }
+  .module:nth-child(even) { background: var(--white); }
+
+  .module-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* ── MÓDULO HEADER ── */
+  .module-header {
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .module-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .module-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .module-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.6rem;
+    background: var(--tag-bg);
+    color: var(--muted);
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+  }
+
+  .print-btn {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--rule);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    transition: all 0.2s;
+  }
+
+  .print-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .module-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .module-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .module-intro {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 620px;
+  }
+
+  /* ── QUOTE ── */
+  .quote {
+    border-left: 3px solid var(--gold);
+    padding: 1.5rem 2rem;
+    margin: 2.5rem 0;
+    background: var(--cream);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* ── SECÇÕES ── */
+  .section { margin-bottom: 3rem; }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section-text {
+    font-size: 0.975rem;
+    line-height: 1.8;
+    color: #2a2825;
+    margin-bottom: 1rem;
+  }
+
+  /* ── CARDS GRID ── */
+  .cards-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  @media (min-width: 600px) {
+    .cards-2 { grid-template-columns: 1fr 1fr; }
+  }
+
+  .card {
+    background: var(--cream);
+    padding: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--rule);
+  }
+
+  .card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .card-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-text {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── STEPS ── */
+  .steps { margin: 1.5rem 0; }
+
+  .step {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: start;
+  }
+
+  .step-num {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .step-content {}
+
+  .step-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .step-text {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── CALLOUTS ── */
+  .callout {
+    padding: 1.25rem 1.5rem;
+    border-radius: 4px;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+
+  .callout strong { display: block; margin-bottom: 0.35rem; }
+
+  .callout-tip { background: #edf7ed; border-left: 3px solid #4caf50; }
+  .callout-warn { background: #fff8e1; border-left: 3px solid #ff9800; }
+  .callout-info { background: #e8f4fd; border-left: 3px solid #2196f3; }
+  .callout-gold { background: var(--cream); border-left: 3px solid var(--gold); }
+  .callout-dark { background: var(--accent-dark); color: var(--paper); border-left: 3px solid var(--gold); }
+
+  .callout-dark strong { color: var(--gold-light); }
+
+  /* ── SCRIPTS ── */
+  .script-block {
+    background: var(--accent-dark);
+    border-radius: 6px;
+    padding: 1.75rem;
+    margin: 1.25rem 0;
+  }
+
+  .script-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .script-text {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.8;
+    white-space: pre-line;
+  }
+
+  .script-text strong { color: var(--gold-light); }
+
+  /* ── TABELAS ── */
+  .table-wrap { overflow-x: auto; margin: 1.5rem 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  th {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+
+  td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: var(--cream); }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    list-style: none;
+    margin: 1rem 0;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .checklist li::before {
+    content: '☐';
+    color: var(--gold);
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  /* ── FUNIL VISUAL ── */
+  .funnel {
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .funnel-step {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .funnel-bar {
+    flex: 1;
+    padding: 0.9rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 3px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .funnel-bar span:last-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    opacity: 0.75;
+  }
+
+  .f1 { background: #1a1815; color: #fff; width: 100%; }
+  .f2 { background: #2d2a26; color: #fff; width: 85%; margin: 0 auto; }
+  .f3 { background: #3f3b35; color: #fff; width: 70%; margin: 0 auto; }
+  .f4 { background: #b89a5a; color: #fff; width: 55%; margin: 0 auto; }
+  .f5 { background: #d4b97a; color: var(--ink); width: 40%; margin: 0 auto; }
+
+  /* ── CADÊNCIA TIMELINE ── */
+  .cadence { margin: 1.5rem 0; }
+
+  .cadence-item {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 1.25rem;
+    margin-bottom: 0;
+    position: relative;
+  }
+
+  .cadence-item::before {
+    content: '';
+    position: absolute;
+    left: 1.6rem;
+    top: 2.5rem;
+    bottom: -0.5rem;
+    width: 1px;
+    background: var(--rule);
+  }
+
+  .cadence-item:last-child::before { display: none; }
+
+  .cadence-day {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    background: var(--gold);
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .cadence-content {
+    padding: 0.6rem 0 2rem;
+  }
+
+  .cadence-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .cadence-text {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.65;
+  }
+
+  /* ── PLAYBOOK DESTAQUE ── */
+  .playbook-section {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 2rem 0;
+  }
+
+  .playbook-header {
+    background: var(--ink);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .playbook-header-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .playbook-header-title {
+    font-weight: 600;
+    color: var(--white);
+    font-size: 0.95rem;
+  }
+
+  .playbook-body {
+    padding: 1.5rem;
+    background: var(--paper);
+  }
+
+  /* ── TAKEAWAYS ── */
+  .takeaways {
+    background: var(--accent-dark);
+    border-radius: 6px;
+    padding: 2rem;
+    margin-top: 3rem;
+  }
+
+  .takeaways-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+
+  .takeaways-list { list-style: none; }
+
+  .takeaways-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .takeaways-list li::before {
+    content: '→';
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .takeaways-list li:last-child { border-bottom: none; }
+
+  /* ── ATIVIDADE PRÁTICA ── */
+  .activity {
+    background: #f0ebe0;
+    border: 1px solid var(--gold);
+    border-radius: 6px;
+    padding: 2rem;
+    margin-top: 3rem;
+  }
+
+  .activity-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .activity-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .activity-text {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #2a2825;
+    margin-bottom: 1rem;
+  }
+
+  .activity ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .activity ul li {
+    padding: 0.4rem 0;
+    font-size: 0.875rem;
+    color: var(--ink);
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .activity ul li::before {
+    content: '✦';
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  /* ── CASE STUDY ── */
+  .case-study {
+    background: var(--cream);
+    border-radius: 6px;
+    padding: 2rem;
+    margin: 2rem 0;
+    border-left: 3px solid var(--gold);
+  }
+
+  .case-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .case-title {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .case-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin: 1.25rem 0;
+  }
+
+  .case-metric {
+    text-align: center;
+  }
+
+  .case-metric-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+
+  .case-metric-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* ── RODAPÉ ── */
+  .footer {
+    background: var(--accent-dark);
+    padding: 5rem 3rem;
+    text-align: center;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .footer-brand span { font-style: italic; }
+
+  .footer-tagline {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-tagline em {
+    font-style: italic;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .footer-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 2rem auto;
+    opacity: 0.4;
+  }
+
+  .footer-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 2.5rem 0;
+  }
+
+  h4 {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin: 1.5rem 0 0.5rem;
+    color: var(--ink);
+  }
+
+  .tag-inline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    background: var(--tag-bg);
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    color: var(--muted);
+  }
+
+  @media print {
+    .cover { page-break-after: always; }
+    .module { page-break-before: always; }
+    .print-btn { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════ CAPA ════════════════════════════════ -->
+<div class="cover" id="topo">
+  <div class="cover-brand">✦ Lune Co. — Consultoria Comercial</div>
+
+  <div class="cover-main">
+    <div class="cover-eyebrow">Método Comercial Completo · Material do Cliente</div>
+    <h1 class="cover-title">Do primeiro<br>contato ao<br><em>cliente fiel</em></h1>
+    <p class="cover-sub">O sistema completo de estruturação comercial — 12 módulos para construir, gerir e escalar um processo de vendas que funciona independente do setor, do porte ou do canal de vendas da sua empresa.</p>
+    <div class="cover-modules">
+      <span class="cover-tag">M1 · Fundamentos</span>
+      <span class="cover-tag">M2 · Prospecção</span>
+      <span class="cover-tag">M3 · Scripts</span>
+      <span class="cover-tag">M4 · Objeções</span>
+      <span class="cover-tag">M5 · Gestão</span>
+      <span class="cover-tag">M6 · Processo</span>
+      <span class="cover-tag">M7 · Rotina</span>
+      <span class="cover-tag">M8 · Scripts Avançados</span>
+      <span class="cover-tag">M9 · Canais de Aquisição</span>
+      <span class="cover-tag">M10 · Pós-Venda</span>
+      <span class="cover-tag">M11 · Tech Stack & IA</span>
+      <span class="cover-tag">M12 · Playbook</span>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <div class="cover-footer-brand">Lune <span>Co.</span></div>
+    <div class="cover-footer-info">
+      luneco.com.br<br>
+      @luneco · Material de uso exclusivo
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ SUMÁRIO ════════════════════════════════ -->
+<section class="toc" id="sumario">
+  <div class="toc-inner">
+    <div class="toc-label">Sumário</div>
+    <h2 class="toc-heading">O que você vai<br>aprender aqui</h2>
+    <ul class="toc-list">
+      <li><a href="#m1"><span class="toc-num">01</span><span class="toc-title">Fundamentos do processo comercial</span><span class="toc-sub">Funil · Jornada · Métricas · Diagnóstico</span></a></li>
+      <li><a href="#m2"><span class="toc-num">02</span><span class="toc-title">Prospecção e geração de leads</span><span class="toc-sub">ICP · Inbound vs Outbound · WhatsApp · LinkedIn · Cold Email</span></a></li>
+      <li><a href="#m3"><span class="toc-num">03</span><span class="toc-title">Scripts de vendas e abordagem consultiva</span><span class="toc-sub">Venda consultiva · SPIN selling · Scripts por etapa · Proposta</span></a></li>
+      <li><a href="#m4"><span class="toc-num">04</span><span class="toc-title">Objeções, follow-up e fechamento</span><span class="toc-sub">Mapa de objeções · Cadências · Técnicas de fechamento · Negociação</span></a></li>
+      <li><a href="#m5"><span class="toc-num">05</span><span class="toc-title">Gestão comercial e métricas</span><span class="toc-sub">KPIs · Pipeline · Forecast · Dashboards · Rituais</span></a></li>
+      <li><a href="#m6"><span class="toc-num">06</span><span class="toc-title">Construindo seu processo comercial</span><span class="toc-sub">Posicionamento · Esteira de produtos · Precificação · Autoridade</span></a></li>
+      <li><a href="#m7"><span class="toc-num">07</span><span class="toc-title">Rotina comercial</span><span class="toc-sub">Rotina por tamanho · Como ensinar · Checklists diários</span></a></li>
+      <li><a href="#m8"><span class="toc-num">08</span><span class="toc-title">Scripts avançados e sessão estratégica</span><span class="toc-sub">RPQ · DM por situação · Pré-qualificação · Sessão estratégica · Downsell</span></a></li>
+      <li><a href="#m9"><span class="toc-num">09</span><span class="toc-title">Canais de aquisição — o motor de leads</span><span class="toc-sub">Matriz de canais · Outbound · Inbound · Parcerias · Indicações</span></a></li>
+      <li><a href="#m10"><span class="toc-num">10</span><span class="toc-title">Pós-venda e expansão — o lucro real</span><span class="toc-sub">Upsell · Régua 30/60/90 dias · Prova social · LTV</span></a></li>
+      <li><a href="#m11"><span class="toc-num">11</span><span class="toc-title">Tech stack e inteligência artificial</span><span class="toc-sub">IA no comercial · Ferramentas essenciais · CRM · Automação</span></a></li>
+      <li><a href="#m12"><span class="toc-num">12</span><span class="toc-title">Gestão de pessoas e playbook</span><span class="toc-sub">Pré-qualificação · Prospecção ativa · Reunião · Negociação · Fechamento · Objeções</span></a></li>
+    </ul>
+
+    <p style="margin-top:2rem; font-size:0.85rem; color:var(--muted); line-height:1.7;">
+      Este material foi desenvolvido pela Lune Co. para uso em consultoria e treinamento comercial. Todo o conteúdo pode ser personalizado para a realidade de cada empresa. Os scripts, frameworks e ferramentas aqui apresentados foram testados em diagnósticos e projetos reais.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ M1 ════════════════════════════════ -->
+<section class="module" id="m1">
+  <div class="module-inner">
+    <div class="module-header">
+      <div class="module-eyebrow">
+        <span class="module-num">Módulo 01 · Fundamentos</span>
+        <span class="module-tag">Funil · Jornada · Métricas · Diagnóstico</span>
+        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+      </div>
+      <h2 class="module-title">Fundamentos do<br><em>processo comercial</em></h2>
+      <p class="module-intro">Antes de qualquer script, tática ou ferramenta, você precisa entender como o processo comercial funciona do ponto de vista do cliente — e do seu. Esse módulo é a base de tudo que vem depois.</p>
+    </div>
+
+    <div class="callout callout-gold">
+      <strong>🔧 Como usar este módulo</strong>
+      Os frameworks, scripts e ferramentas aqui apresentados são universais. Onde você ver <strong>[colchetes]</strong>, substitua pelo contexto da sua empresa — seu setor, seu produto, seu cliente ideal. O método não muda. A linguagem você adapta.
+    </div>
+
+    <div class="quote">
+      <p>"Processo bate talento. Um vendedor mediano com processo bom vende mais do que um vendedor talentoso sem processo."</p>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">O funil de vendas</h3>
+      <p class="section-text">O funil de vendas representa a jornada do cliente desde o momento em que ele descobre que você existe até se tornar um cliente fiel. Cada etapa tem um comportamento diferente — e exige uma abordagem diferente da sua parte.</p>
+      <p class="section-text">A distinção mais importante que a maioria ignora: <strong>funil e pipeline não são a mesma coisa.</strong></p>
+
+      <div class="cards-2">
+        <div class="card">
+          <div class="card-label">Funil</div>
+          <div class="card-title">Perspectiva do cliente</div>
+          <div class="card-text">Onde está a mente do lead. É sobre o comportamento e o nível de consciência dele em relação ao problema e à solução.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Pipeline</div>
+          <div class="card-title">Perspectiva do vendedor</div>
+          <div class="card-text">Onde cada negócio está no seu processo. É a visão operacional — que ação você precisa tomar agora.</div>
+        </div>
+      </div>
+
+      <h4>As 5 etapas do funil</h4>
+      <div class="funnel">
+        <div class="funnel-step"><div class="funnel-bar f1"><span>1 · Consciência</span><span>Alcance, impressões</span></div></div>
+        <div class="funnel-step"><div class="funnel-bar f2"><span>2 · Interesse</span><span>Taxa de resposta</span></div></div>
+        <div class="funnel-step"><div class="funnel-bar f3"><span>3 · Consideração</span><span>Propostas enviadas</span></div></div>
+        <div class="funnel-step"><div class="funnel-bar f4"><span>4 · Decisão</span><span>Taxa de fechamento</span></div></div>
+        <div class="funnel-step"><div class="funnel-bar f5"><span>5 · Fidelização</span><span>LTV · NPS · Indicações</span></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Os 5 níveis de consciência do lead</h3>
+      <p class="section-text">Cada lead está num nível diferente de consciência sobre o problema e a solução. Falar a linguagem errada para o nível errado é o erro mais comum em vendas.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Nível</th><th>O que o lead pensa</th><th>O que você comunica</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1 · Inconsciente</strong></td><td>"Tá indo… poderia ser melhor, mas tá ok."</td><td>Dados que provocam a percepção do problema</td></tr>
+            <tr><td><strong>2 · Consciente da dor</strong></td><td>"As vendas estão fracas mas não sei por quê."</td><td>Nomeie a dor com precisão</td></tr>
+            <tr><td><strong>3 · Consciente do problema</strong></td><td>"Meu time não tem processo, cada um vende diferente."</td><td>Mostre o caminho para resolver</td></tr>
+            <tr><td><strong>4 · Consciente da solução</strong></td><td>"Preciso contratar alguém para estruturar o comercial."</td><td>Diferenciação e prova de resultado</td></tr>
+            <tr><td><strong>5 · Totalmente consciente</strong></td><td>"Já vi seu trabalho, quero entender como funciona."</td><td>CTA direto para diagnóstico</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-tip">
+        <strong>💡 A sacada prática</strong>
+        A maioria do seu público está nos níveis 1, 2 e 3. Mas a maioria dos consultores cria conteúdo só para os níveis 4 e 5. Resultado: falam para uma fatia pequena e perdem a maioria da audiência.
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">As métricas essenciais</h3>
+      <div class="cards-2">
+        <div class="card"><div class="card-label">Volume</div><div class="card-title">Leads/mês</div><div class="card-text">Referência para consultoria B2B: 20–60 leads/mês dependendo do ticket.</div></div>
+        <div class="card"><div class="card-label">Conversão</div><div class="card-title">Taxa de fechamento</div><div class="card-text">Propostas → clientes. Fórmula: fechados ÷ propostas × 100. Média: 20–40%.</div></div>
+        <div class="card"><div class="card-label">Valor</div><div class="card-title">Ticket médio e LTV</div><div class="card-text">Ticket = receita ÷ clientes. LTV = ticket × meses de retenção.</div></div>
+        <div class="card"><div class="card-label">Custo</div><div class="card-title">CAC</div><div class="card-text">Custo de aquisição por cliente. Deve ser menor que LTV/3.</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">O framework de diagnóstico comercial</h3>
+      <p class="section-text">O diagnóstico é o ponto de partida de qualquer trabalho sério — tanto para entender seus próprios clientes quanto para mapear o negócio de quem você vai atender como consultora.</p>
+
+      <h4>As 5 dimensões do diagnóstico</h4>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Processo</div><div class="step-text">Existe um processo documentado? As etapas são claras para todo o time?</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Pessoas</div><div class="step-text">Quem vende? Tem perfil certo para a função? Recebeu treinamento? Tem meta clara?</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Dados</div><div class="step-text">A empresa acompanha métricas? Tem CRM? Sabe a taxa de conversão de cada etapa?</div></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Mensagem</div><div class="step-text">O discurso de vendas é claro? Sabe articular o valor? Sabe quem é o cliente ideal?</div></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-content"><div class="step-title">Geração de demanda</div><div class="step-text">De onde vêm os leads? É previsível? É escalável?</div></div></div>
+      </div>
+
+      <div class="callout callout-warn">
+        <strong>⚠️ O sinal de alarme universal</strong>
+        "Está tudo na minha cabeça" ou "no WhatsApp" = empresa sem inteligência comercial. "A gente vai tentando até a pessoa responder" = não há processo, há improviso.
+      </div>
+    </div>
+
+    <div class="takeaways">
+      <div class="takeaways-label">✦ O que levar deste módulo</div>
+      <ul class="takeaways-list">
+        <li><strong>Processo bate talento.</strong> Um vendedor mediano com processo bom vende mais do que um talentoso sem processo.</li>
+        <li><strong>O gargalo raramente está onde o cliente acha.</strong> Ele vai dizer "falta cliente". Você vai descobrir que falta follow-up, ou que a proposta é ruim, ou que o ICP está errado.</li>
+        <li><strong>Métricas sem contexto enganam.</strong> Sempre olhe o funil inteiro, não uma métrica isolada.</li>
+      </ul>
+    </div>
+
+    <div class="activity">
+      <div class="activity-label">✦ Atividade prática — Módulo 1</div>
+      <div class="activity-title">Mapeie o funil atual da sua empresa</div>
+      <p class="activity-text">Antes de avançar para o próximo módulo, reserve 30 minutos e responda honestamente às perguntas abaixo. Elas vão revelar onde está o maior gargalo no seu processo hoje.</p>
+      <ul>
+        <li>Quantos leads entram por mês? De onde vêm?</li>
+        <li>Qual é a taxa de resposta no primeiro contato?</li>
+        <li>Quantas reuniões de diagnóstico acontecem por semana?</li>
+        <li>Qual é a sua taxa de fechamento atual (propostas enviadas ÷ clientes fechados)?</li>
+        <li>Qual é o seu ticket médio e ciclo médio de venda?</li>
+        <li>Onde você acha que está o maior gargalo — e por quê?</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ M2 ════════════════════════════════ -->
+<section class="module" id="m2">
+  <div class="module-inner">
+    <div class="module-header">
+      <div class="module-eyebrow">
+        <span class="module-num">Módulo 02 · Prospecção</span>
+        <span class="module-tag">ICP · Inbound · Outbound · Scripts</span>
+        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+      </div>
+      <h2 class="module-title">Prospecção e<br><em>geração de leads</em></h2>
+      <p class="module-intro">Prospecção não é interromper alguém. É levar o problema certo para a pessoa certa no momento certo. Quem tem o problema e você não aparece — você está falhando com ela, não ajudando.</p>
+    </div>
+
+    <div class="quote">
+      <p>"Volume sem ICP é energia desperdiçada. 10 mensagens para o perfil certo convertem mais do que 100 mensagens para perfis aleatórios."</p>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Inbound vs Outbound</h3>
+      <div class="cards-2">
+        <div class="card">
+          <div class="card-label">Inbound — o lead vem até você</div>
+          <div class="card-title">Construção de autoridade</div>
+          <div class="card-text">Você cria conteúdo e o lead chega interessado.<br><br><strong>Custo/lead:</strong> baixo (longo prazo)<br><strong>Tempo p/ resultado:</strong> 3–12 meses<br><strong>Qualidade:</strong> alta — ele te escolheu<br><strong>Canais:</strong> LinkedIn, Instagram, SEO, indicação orgânica</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Outbound — você vai até o lead</div>
+          <div class="card-title">Prospecção ativa</div>
+          <div class="card-text">Você identifica o perfil ideal e faz o primeiro contato.<br><br><strong>Custo/lead:</strong> maior (tempo e energia)<br><strong>Tempo p/ resultado:</strong> dias/semanas<br><strong>Controle:</strong> alto — você escolhe com quem fala<br><strong>Canais:</strong> WhatsApp, LinkedIn DM, e-mail, ligação</div>
+        </div>
+      </div>
+      <div class="callout callout-gold">
+        <strong>🎯 A estratégia certa para quem está construindo</strong>
+        No começo: 80% outbound, 20% inbound. Você não tem audiência ainda. Com 10+ clientes: migre gradualmente para 50/50 e depois 30/70.
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Definindo o ICP — Cliente Ideal</h3>
+      <p class="section-text">ICP não é "qualquer empresa que precise de consultoria". É o perfil que tem o problema que você resolve, tem dinheiro para pagar, tem urgência para resolver, e você consegue entregar resultado de verdade.</p>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Demográfico</div><div class="step-text">Setor, porte, localização. Ex: serviços B2B, 5–50 funcionários, Sul/Sudeste.</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Situacional</div><div class="step-text">Momento do negócio. Ex: crescendo mas travado nas vendas, sem processo comercial estruturado.</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Comportamental</div><div class="step-text">Como ele age e pensa. Ex: aberto a mudança, já investiu em consultoria antes.</div></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Psicográfico</div><div class="step-text">Dores, medos e desejos. Ex: medo de perder mercado, desejo de escalar sem depender só de indicação.</div></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Scripts de prospecção — WhatsApp</h3>
+      <div class="script-block">
+        <div class="script-label">Lead frio — gancho de setor</div>
+        <div class="script-text">"Oi [nome], vi que você está à frente de [empresa] no [setor]. Trabalhamos com estruturação comercial para [setor] — especialmente quando as vendas travam porque o processo depende muito do fundador. Esse é um ponto que aparece aí também?"</div>
+      </div>
+      <div class="script-block">
+        <div class="script-label">Lead indicado</div>
+        <div class="script-text">"Oi [nome], sou [seu nome], da Lune Co. — o [quem indicou] me sugeriu entrar em contato. Pelo que ele me contou, vocês estão num momento de [contexto]. Isso está certo? Posso fazer um diagnóstico rápido de 30 minutos — sem compromisso."</div>
+      </div>
+      <div class="script-block">
+        <div class="script-label">Reativação — lead que sumiu</div>
+        <div class="script-text">"[Nome], vou ser direta: percebi que o contato esfriou e não sei o motivo. Não precisa de desculpa — só me diz se ainda faz sentido conversarmos ou se o momento mudou. Sua honestidade me ajuda mais do que o silêncio."</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Scripts de prospecção — LinkedIn</h3>
+      <div class="script-block">
+        <div class="script-label">Nota de conexão (máx. 300 caracteres)</div>
+        <div class="script-text">"Oi [nome], acompanho seu trabalho no [setor] e me identifiquei com o que você compartilha. Quero conectar e trocar ideias por aqui."</div>
+      </div>
+      <div class="script-block">
+        <div class="script-label">1ª mensagem após aceitar conexão</div>
+        <div class="script-text">"Oi [nome], obrigada pela conexão! Vi que você está à frente de [empresa/área]. Trabalho com estruturação comercial — especialmente em empresas que crescem mas onde o processo de vendas não acompanhou o ritmo. Esse é um ponto que aparece aí também?"</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Cold email — estrutura que abre conversa</h3>
+      <div class="script-block">
+        <div class="script-label">Modelo B2B Serviços · Assunto: dúvida rápida sobre o comercial de vocês</div>
+        <div class="script-text">"Oi [nome],
+
+Vi que vocês são uma [tipo de empresa] com foco em [nicho].
+
+Trabalhamos com [segmento] no perfil de vocês — especialmente quando as vendas ainda dependem muito do fundador e o follow-up está quebrando entre a proposta e o fechamento.
+
+Esse é um ponto que aparece aí também?
+
+[seu nome] · Lune Co."</div>
+      </div>
+    </div>
+
+    <div class="takeaways">
+      <div class="takeaways-label">✦ O que levar deste módulo</div>
+      <ul class="takeaways-list">
+        <li><strong>ICP antes de volume.</strong> Valide com quem você fala antes de escalar quantidade.</li>
+        <li><strong>Personalização é o que separa prospecção de spam.</strong> Uma linha específica sobre a pessoa muda completamente a taxa de resposta.</li>
+        <li><strong>Prospecção é processo, não evento.</strong> Os melhores prospectam de forma constante — mesmo quando a agenda está cheia.</li>
+      </ul>
+    </div>
+
+    <div class="activity">
+      <div class="activity-label">✦ Atividade prática — Módulo 2</div>
+      <div class="activity-title">Defina o seu ICP em uma página</div>
+      <p class="activity-text">Preencha cada campo com o máximo de especificidade. Quanto mais específico, mais fácil fica prospectar — e mais alta fica a taxa de resposta.</p>
+      <ul>
+        <li>Escreva o perfil demográfico do seu ICP (setor, porte, localização, cargo do decisor)</li>
+        <li>Descreva o momento situacional que ele precisa estar para te contratar</li>
+        <li>Liste as 3 dores principais que ele tem e como ele as descreve com as próprias palavras</li>
+        <li>Escreva 1 script de WhatsApp personalizado para esse ICP e envie para 5 leads hoje</li>
+        <li>Registre a taxa de resposta ao final de 48h</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ M3 ════════════════════════════════ -->
+<section class="module" id="m3">
+  <div class="module-inner">
+    <div class="module-header">
+      <div class="module-eyebrow">
+        <span class="module-num">Módulo 03 · Scripts</span>
+        <span class="module-tag">Venda consultiva · SPIN · Scripts por etapa</span>
+        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+      </div>
+      <h2 class="module-title">Scripts de vendas e<br><em>abordagem consultiva</em></h2>
+      <p class="module-intro">Venda consultiva não é uma técnica. É uma postura. Você não está tentando convencer ninguém — está ajudando alguém a tomar a melhor decisão para o negócio dele.</p>
+    </div>
+
+    <div class="quote">
+      <p>"A pergunta certa vale mais do que o argumento perfeito. Quando o cliente diz 'puts, são quase R$ 10k por mês que estou perdendo' — ele se vendeu. Sua proposta é só a confirmação."</p>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Venda consultiva vs transacional</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Dimensão</th><th>Venda Transacional</th><th>Venda Consultiva</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Foco</strong></td><td>No produto e no preço</td><td>No problema do cliente</td></tr>
+            <tr><td><strong>Postura</strong></td><td>Convencer a comprar</td><td>Ajudar a decidir</td></tr>
+            <tr><td><strong>Conversa</strong></td><td>Você fala, cliente ouve</td><td>Cliente fala 70%, você 30%</td></tr>
+            <tr><td><strong>Objeção</strong></td><td>Obstáculo a vencer</td><td>Informação — revela o que não ficou claro</td></tr>
+            <tr><td><strong>Resultado</strong></td><td>Compra pontual</td><td>Relação de confiança, recorrência, indicações</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">SPIN Selling — a estrutura de perguntas</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">S</div><div class="step-content"><div class="step-title">Situação — entender o contexto</div><div class="step-text">Perguntas factuais sobre o estado atual. Máximo 3–4 perguntas. <em>Ex: "Me conta como funciona o processo de vendas hoje — do primeiro contato até o fechamento."</em></div></div></div>
+        <div class="step"><div class="step-num">P</div><div class="step-content"><div class="step-title">Problema — revelar as dificuldades</div><div class="step-text">Explora dificuldades e insatisfações. É aqui que o cliente articula o problema em voz alta — muitas vezes pela primeira vez. <em>Ex: "Quando você manda a proposta e não tem resposta — o que você faz? Isso acontece com frequência?"</em></div></div></div>
+        <div class="step"><div class="step-num">I</div><div class="step-content"><div class="step-title">Implicação — ampliar o impacto</div><div class="step-text">A mais poderosa. Conecta o problema a impactos financeiros. <em>Ex: "Se metade das propostas some — com o ticket que vocês têm, quanto você acha que deixa de fechar por mês?"</em></div></div></div>
+        <div class="step"><div class="step-num">N</div><div class="step-content"><div class="step-title">Necessidade — o cliente pede a solução</div><div class="step-text">Faz o cliente articular o valor da solução antes de você propô-la. <em>Ex: "Se você tivesse uma cadência de follow-up estruturada — o que mudaria? Quanto você recuperaria?"</em></div></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Scripts por etapa da venda</h3>
+      <div class="script-block">
+        <div class="script-label">Abertura da reunião de diagnóstico</div>
+        <div class="script-text">"Minha ideia aqui é entender bem a realidade comercial de vocês hoje — o que está funcionando e onde estão os gargalos. Vou fazer algumas perguntas, e no final eu te dou uma devolutiva do que enxergo e o que faria sentido como próximo passo. <strong>Pode ser assim?</strong>"</div>
+      </div>
+      <div class="script-block">
+        <div class="script-label">Devolutiva do diagnóstico</div>
+        <div class="script-text">"Com base no que você me contou, enxergo 3 pontos principais: [1], [2] e [3]. O maior gargalo parece ser [X] — porque [razão baseada nos dados que ele deu]. <strong>Isso faz sentido pra você também?</strong> Consigo montar uma proposta específica para isso. Posso te mandar até [data]?"</div>
+      </div>
+      <div class="script-block">
+        <div class="script-label">Apresentação da proposta</div>
+        <div class="script-text">"Antes de apresentar, deixa eu fazer um espelho rápido do que entendi: você me disse que [gargalo 1], que [gargalo 2] e que o maior impacto está em [gargalo 3]. Isso representa em torno de [R$ impacto] por mês. <strong>Ainda faz sentido?</strong>
+
+Posso fazer de duas formas:
+Opção A — [escopo menor] por R$ [X].
+Opção B — [projeto completo] por R$ [X].
+
+Qual das duas faz mais sentido pro momento de vocês?"</div>
+      </div>
+    </div>
+
+    <div class="takeaways">
+      <div class="takeaways-label">✦ O que levar deste módulo</div>
+      <ul class="takeaways-list">
+        <li><strong>Script é ponto de partida, não roteiro fixo.</strong> Internalize a estrutura. Com o tempo você adapta para a sua voz.</li>
+        <li><strong>O cliente se convence — você facilita.</strong> SPIN existe para que ele chegue à conclusão sozinho.</li>
+        <li><strong>Nunca apresente antes de entender.</strong> Diagnóstico precede proposta. Sempre.</li>
+      </ul>
+    </div>
+
+    <div class="activity">
+      <div class="activity-label">✦ Atividade prática — Módulo 3</div>
+      <div class="activity-title">Faça o roleplay da sua próxima reunião de diagnóstico</div>
+      <p class="activity-text">Antes da sua próxima reunião real, simule com alguém de confiança — ou grave você mesmo respondendo em voz alta — as 4 perguntas do SPIN adaptadas para o seu ICP.</p>
+      <ul>
+        <li>Escreva 2 perguntas de Situação específicas para o seu segmento</li>
+        <li>Escreva 2 perguntas de Problema que revelam a dor principal</li>
+        <li>Escreva 1 pergunta de Implicação que conecta a dor a um impacto financeiro</li>
+        <li>Escreva 1 pergunta de Necessidade que faz o cliente pedir a solução</li>
+        <li>Grave um áudio de 3 minutos simulando o diagnóstico — ouça e identifique onde você trava</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ M4 ════════════════════════════════ -->
+<section class="module" id="m4">
+  <div class="module-inner">
+    <div class="module-header">
+      <div class="module-eyebrow">
+        <span class="module-num">Módulo 04 · Objeções e Fechamento</span>
+        <span class="module-tag">Objeções · Cadência · Negociação · Fechamento</span>
+        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+      </div>
+      <h2 class="module-title">Objeções, follow-up<br><em>e fechamento</em></h2>
+      <p class="module-intro">48% dos vendedores nunca fazem um segundo contato. 80% dos fechamentos acontecem entre o 5º e o 12º contato. Isso significa que quase metade das pessoas está competindo por 20% das vendas.</p>
+    </div>
+
+    <div class="quote">
+      <p>"Objeção não é rejeição — é informação disfarçada. Cada objeção revela o que ainda não ficou claro, o que o lead não acredita, ou o que ele tem medo de admitir."</p>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">A estrutura universal de resposta a objeções</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Validar — mostrar que entendeu</div><div class="step-text">Nunca discuta antes de validar. "Entendo. Faz sentido pensar assim."</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Investigar — entender o que está por trás</div><div class="step-text">A objeção declarada raramente é a real. "Me ajuda a entender — [objeção] em relação a quê especificamente?"</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Responder — só depois de entender</div><div class="step-text">Com a objeção real em mãos, você responde de forma específica e relevante.</div></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Confirmar — verificar se resolveu</div><div class="step-text">"Isso resolve o que estava travando?" Avança só se ele confirmar.</div></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">As 7 objeções mais comuns</h3>
+
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">01</span><span class="playbook-header-title">"Está caro" — Percepção de valor</span></div>
+        <div class="playbook-body">
+          <p class="section-text"><strong>O que significa:</strong> não enxergou valor suficiente para justificar o preço.</p>
+          <div class="script-block"><div class="script-label">Script</div><div class="script-text">"Entendo. Me ajuda a entender — caro em relação a quê? [Após resposta:] O que eu quero garantir que ficou claro é que o investimento de R$ [X] está sendo comparado com [R$ impacto] de receita que você me disse estar deixando na mesa por mês. O retorno acontece em [prazo]. Isso muda a perspectiva?"</div></div>
+          <div class="callout callout-warn"><strong>Nunca:</strong> dar desconto imediatamente sem investigar.</div>
+        </div>
+      </div>
+
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">02</span><span class="playbook-header-title">"Preciso pensar" — Dúvida não verbalizada</span></div>
+        <div class="playbook-body">
+          <div class="script-block"><div class="script-label">Script</div><div class="script-text">"Claro, faz sentido. Posso te perguntar uma coisa? Quando você diz que precisa pensar — o que especificamente está pesando mais? É o investimento, o momento, alguma dúvida sobre o processo? [Define próximo contato com data concreta.]"</div></div>
+          <div class="callout callout-warn"><strong>Nunca:</strong> "ok, me chama quando decidir."</div>
+        </div>
+      </div>
+
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">03</span><span class="playbook-header-title">"Não é o momento" — Urgência baixa</span></div>
+        <div class="playbook-body">
+          <div class="script-block"><div class="script-label">Script</div><div class="script-text">"Faz sentido. Só quero deixar um número claro: enquanto esse problema continua, você está deixando em torno de R$ [X] na mesa por mês. Não estou falando pra pressionar — estou porque acho que você merece ter essa clareza. Quando você imagina que o momento vai estar melhor — 1 mês, 3 meses?"</div></div>
+        </div>
+      </div>
+
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">04</span><span class="playbook-header-title">"Preciso falar com meu sócio" — Decisor ausente</span></div>
+        <div class="playbook-body">
+          <div class="script-block"><div class="script-label">Script</div><div class="script-text">"Claro. Só me diz: você pessoalmente está convencido que faz sentido? [Se sim:] O que funciona melhor — você apresenta ou a gente marca uma call com os dois juntos?"</div></div>
+          <div class="callout callout-warn"><strong>Nunca:</strong> mandar material para ele "apresentar" — você perde o controle da narrativa.</div>
+        </div>
+      </div>
+
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">05</span><span class="playbook-header-title">"Já tentei consultoria e não funcionou" — Experiência negativa</span></div>
+        <div class="playbook-body">
+          <div class="script-block"><div class="script-label">Script</div><div class="script-text">"Faz todo sentido ter esse receio. Me conta o que aconteceu — o que foi prometido e o que não veio? [Após ouvir:] O que você descreveu é exatamente o que acontece quando a consultoria entrega diagnóstico mas não acompanha implementação. O que eu faço diferente é [X concreto]."</div></div>
+        </div>
+      </div>
+
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">06</span><span class="playbook-header-title">"Preciso de garantia" — Risco percebido alto</span></div>
+        <div class="playbook-body">
+          <div class="script-block"><div class="script-label">Script</div><div class="script-text">"Entendo. Resultado em consultoria depende de dois lados — o que eu entrego e o que você implementa. O que eu posso garantir: entregáveis claros, prazos cumpridos, e uma devolutiva honesta se algo não estiver funcionando. O que acontece com empresas no perfil de vocês: [resultado do case fictício ou real]. Isso te dá mais segurança?"</div></div>
+        </div>
+      </div>
+
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">07</span><span class="playbook-header-title">"Vou fazer internamente" — Concorrência com o DIY</span></div>
+        <div class="playbook-body">
+          <div class="script-block"><div class="script-label">Script</div><div class="script-text">"Faz sentido querer fazer isso. Me diz uma coisa — esse problema existe há quanto tempo? [Após resposta:] Então você já tem [X meses] tentando resolver internamente. O que mudaria agora? Às vezes o valor de um processo externo não é o conhecimento — é ter alguém com tempo e foco exclusivo para fazer o que nunca sobe na lista de prioridades."</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Cadência de follow-up pós-proposta</h3>
+      <div class="cadence">
+        <div class="cadence-item"><div class="cadence-day">D0</div><div class="cadence-content"><div class="cadence-label">Mesmo dia — resumo e próximo passo</div><div class="cadence-text">"[Nome], obrigada pela conversa. Resumindo o que mapeamos: [pontos]. Me fala até quando você consegue dar um retorno — assim já bloqueo na agenda."</div></div></div>
+        <div class="cadence-item"><div class="cadence-day">D2</div><div class="cadence-content"><div class="cadence-label">Dia 2 — entrega de valor</div><div class="cadence-text">"[Nome], lembrei de você vendo isso. [Insight conectado ao problema dele]. Qualquer dúvida sobre a proposta, pode me chamar."</div></div></div>
+        <div class="cadence-item"><div class="cadence-day">D5</div><div class="cadence-content"><div class="cadence-label">Dia 5 — verificar cenário</div><div class="cadence-text">"[Nome], como está o processo de avaliação aí? Surgiu alguma dúvida sobre a proposta que eu possa responder?"</div></div></div>
+        <div class="cadence-item"><div class="cadence-day">D10</div><div class="cadence-content"><div class="cadence-label">Dia 10 — case de resultado similar</div><div class="cadence-text">"[Nome], fechei uma consultoria essa semana com uma empresa bem parecida com a de vocês — mesmo setor, mesmo gargalo. Em 30 dias a taxa de resposta subiu de 12% para 31%."</div></div></div>
+        <div class="cadence-item"><div class="cadence-day">D21</div><div class="cadence-content"><div class="cadence-label">Dia 21 — quebra de padrão</div><div class="cadence-text">"[Nome], respeito muito o seu tempo. Antes de encerrar, queria entender: o que travou? Foi timing, orçamento, alguma dúvida que eu não respondi bem?"</div></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Técnicas de fechamento</h3>
+      <div class="script-block">
+        <div class="script-label">Fechamento por alternativa — o mais natural</div>
+        <div class="script-text">"Qual das duas opções faz mais sentido pro momento de vocês — a A ou a B?" <strong>[Silêncio. Quem fala primeiro, perde.]</strong></div>
+      </div>
+      <div class="script-block">
+        <div class="script-label">Fechamento direto</div>
+        <div class="script-text">"Vou ser direta: com base no que você me contou, acredito muito que faz sentido trabalharmos juntos. <strong>O que você precisa para a gente confirmar essa semana?</strong>"</div>
+      </div>
+      <div class="script-block">
+        <div class="script-label">Fechamento por custo da espera</div>
+        <div class="script-text">"Com o que você me contou, vocês estão deixando em torno de R$ [X] na mesa por mês. Cada mês tem um custo. <strong>O que travaria a gente de começar já na próxima semana?</strong>"</div>
+      </div>
+      <div class="callout callout-dark">
+        <strong>🤫 A regra do silêncio</strong>
+        Depois de fazer a pergunta de fechamento, cale a boca. Cada palavra depois da pergunta enfraquece sua posição. O silêncio é o lead processando — não rejeição.
+      </div>
+    </div>
+
+    <div class="takeaways">
+      <div class="takeaways-label">✦ O que levar deste módulo</div>
+      <ul class="takeaways-list">
+        <li><strong>80% dos fechamentos acontecem depois do 5º contato.</strong> Cadência disciplinada é o que separa quem fecha de quem abandona.</li>
+        <li><strong>Nunca dê desconto na primeira objeção.</strong> Investigue antes de responder.</li>
+        <li><strong>Fechamento não é pressão — é facilitação.</strong> Se você está "tentando fechar com força", algo nas etapas anteriores não foi bem feito.</li>
+      </ul>
+    </div>
+
+    <div class="activity">
+      <div class="activity-label">✦ Atividade prática — Módulo 4</div>
+      <div class="activity-title">Monte o seu mapa de objeções personalizado</div>
+      <p class="activity-text">Pense nas últimas 5 vezes que uma venda não fechou. Qual foi a objeção declarada? E qual você acha que era a objeção real? Escreva isso e construa seu script de resposta para cada uma.</p>
+      <ul>
+        <li>Liste as 3 objeções que você mais recebe no seu processo</li>
+        <li>Escreva a versão "real" por trás de cada uma</li>
+        <li>Escreva o script de validação + investigação + resposta para cada</li>
+        <li>Pratique as respostas em voz alta até ficarem naturais</li>
+        <li>Aplique na próxima objeção real e registre o resultado</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ M5 ════════════════════════════════ -->
+<section class="module" id="m5">
+  <div class="module-inner">
+    <div class="module-header">
+      <div class="module-eyebrow">
+        <span class="module-num">Módulo 05 · Gestão</span>
+        <span class="module-tag">KPIs · Pipeline · Forecast · Rituais</span>
+        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+      </div>
+      <h2 class="module-title">Gestão comercial<br><em>e métricas</em></h2>
+      <p class="module-intro">Gestão comercial não é reunião para ver número. É o sistema que garante que o processo funciona mesmo quando você não está olhando. Quem gerencia só pelo resultado não sabe o que fazer quando ele cai.</p>
+    </div>
+
+    <div class="quote">
+      <p>"Faturamento é consequência — não causa. Quando você vê o faturamento cair, a decisão que causou isso foi tomada 30, 60, 90 dias atrás."</p>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">KPIs: o que medir de verdade</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Camada</th><th>Métrica</th><th>Referência saudável</th><th>Sinal de alerta</th></tr></thead>
+          <tbody>
+            <tr><td>Entrada</td><td>Leads gerados/semana</td><td>20–60/mês para B2B</td><td>Queda consecutiva por 2 semanas</td></tr>
+            <tr><td>Entrada</td><td>Taxa de resposta</td><td>>25% no WhatsApp</td><td>Abaixo de 25%: revise script ou ICP</td></tr>
+            <tr><td>Entrada</td><td>Reuniões agendadas/semana</td><td>2–3/semana no início</td><td>Menos de 1: pipeline travado no topo</td></tr>
+            <tr><td>Conversão</td><td>Taxa diagnóstico → proposta</td><td>>60%</td><td>Abaixo: lead sem fit ou diagnóstico raso</td></tr>
+            <tr><td>Conversão</td><td>Taxa de fechamento</td><td>25–45%</td><td>Abaixo de 15%: problema na proposta</td></tr>
+            <tr><td>Valor</td><td>Ticket médio</td><td>Crescendo YoY</td><td>Estagnação por 3+ meses</td></tr>
+            <tr><td>Valor</td><td>MRR (retainers)</td><td>Crescendo MoM</td><td>Churn sem substituição</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Pipeline: como estruturar e manter vivo</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Etapa</th><th>Critério de entrada</th><th>Probabilidade</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Prospecção</strong></td><td>Lead identificado, primeiro contato feito</td><td>10%</td></tr>
+            <tr><td><strong>Interesse</strong></td><td>Respondeu, conversa aberta</td><td>20%</td></tr>
+            <tr><td><strong>Diagnóstico agendado</strong></td><td>Reunião marcada</td><td>40%</td></tr>
+            <tr><td><strong>Proposta enviada</strong></td><td>Proposta apresentada ao vivo</td><td>60%</td></tr>
+            <tr><td><strong>Negociação</strong></td><td>Objeção em aberto, follow-up ativo</td><td>75%</td></tr>
+            <tr><td><strong>Fechado / Perdido</strong></td><td>Decisão final — sempre registre o motivo</td><td>100% / 0%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-warn">
+        <strong>🚨 Sinal de pipeline doente</strong>
+        Mais de 30% dos leads parados na mesma etapa por mais de 2 semanas indica gargalo — investigue se é processo, mensagem ou qualificação.
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Os 3 rituais de gestão que não podem faltar</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Reunião semanal de pipeline — toda segunda, 30 min</div><div class="step-text">Pauta fixa: leads que entraram, reuniões acontecidas, propostas abertas, fechamentos, perdas e motivos. Sai com ação definida para cada lead parado. Não é reunião de cobrança — é reunião de decisão.</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">1:1 individual com vendedor — quinzenal, 20 min</div><div class="step-text">Não fala sobre número — fala sobre o que está travando. Gestor ouve 70% do tempo. "Onde você está com dificuldade? O que precisa de ajuda?"</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Review mensal — último dia do mês, 60 min</div><div class="step-text">Compara com o mês anterior. Identifica o que melhorou, o que piorou, o que muda. Define as 3 prioridades do próximo mês.</div></div></div>
+      </div>
+    </div>
+
+    <div class="takeaways">
+      <div class="takeaways-label">✦ O que levar deste módulo</div>
+      <ul class="takeaways-list">
+        <li><strong>Gestor que gerencia só resultado não gerencia — reage.</strong> Os indicadores de processo revelam o problema antes de virar crise.</li>
+        <li><strong>Ritual sem pauta fixa vira conversa.</strong> Toda reunião de gestão tem estrutura definida antes de começar.</li>
+        <li><strong>Dashboard que não é olhado é decoração.</strong> O que importa não é a ferramenta — é o hábito de olhar toda semana.</li>
+      </ul>
+    </div>
+
+    <div class="activity">
+      <div class="activity-label">✦ Atividade prática — Módulo 5</div>
+      <div class="activity-title">Crie o seu dashboard de uma página</div>
+      <p class="activity-text">Você não precisa de uma ferramenta cara. Uma planilha simples com as métricas certas, atualizada toda semana, já coloca você à frente de 90% das empresas do mercado.</p>
+      <ul>
+        <li>Escolha as 5 métricas mais relevantes para o seu negócio agora</li>
+        <li>Crie uma planilha com colunas: semana, meta, realizado, variação</li>
+        <li>Bloqueie 20 minutos toda segunda-feira para atualizar</li>
+        <li>Após 4 semanas, analise: qual métrica melhorou? Qual piorou? Por quê?</li>
+        <li>Defina 1 ação de melhoria baseada nos dados — não no feeling</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ M6 ════════════════════════════════ -->
+<section class="module" id="m6">
+  <div class="module-inner">
+    <div class="module-header">
+      <div class="module-eyebrow">
+        <span class="module-num">Módulo 06 · Processo Comercial</span>
+        <span class="module-tag">Posicionamento · Esteira · Precificação · Autoridade</span>
+        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+      </div>
+      <h2 class="module-title">Construindo seu<br><em>processo comercial</em></h2>
+      <p class="module-intro">Negócio sem processo é esforço sem retorno. A diferença entre crescer de forma consistente ou viver de picos e secas está em como você se posiciona, o que você vende e como cobra.</p>
+    </div>
+
+    <div class="quote">
+      <p>"Generalista compete por preço. Especialista compete por resultado. Quanto mais específico o posicionamento, mais fácil é vender — mesmo que o mercado pareça menor."</p>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Os 3 eixos do posicionamento</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Para quem — seu ICP como posicionamento público</div><div class="step-text">Não "empresas B2B". Quanto mais específico, mais o cliente certo se identifica. Ex: "donos de agências digitais que cresceram por indicação mas travam quando tentam escalar."</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Qual problema — específico o suficiente para doer</div><div class="step-text">Não "aumentar as vendas" mas "parar de perder leads bons no follow-up". Quanto mais específico, mais o ICP sente que você é para ele.</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Qual resultado — o "depois" em números</div><div class="step-text">"Melhorar as vendas" é fraco. "Dobrar a taxa de fechamento em 60 dias" é forte. Resultado vago não vende.</div></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">A esteira de produtos</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Produto</th><th>Objetivo</th><th>Ticket</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Diagnóstico gratuito ou pago</strong></td><td>Porta de entrada — qualificar e converter para o produto principal</td><td>R$ [definir]</td></tr>
+            <tr><td><strong>Produto de entrada (2–4 semanas)</strong></td><td>Resolver 1 gargalo específico com resultado rápido</td><td>R$ [ticket baixo]</td></tr>
+            <tr><td><strong>Produto principal (prazo definido)</strong></td><td>Estruturação completa — o core do negócio</td><td>R$ [ticket médio]</td></tr>
+            <tr><td><strong>Retainer mensal</strong></td><td>Acompanhamento e manutenção do processo</td><td>R$ [recorrência]/mês</td></tr>
+            <tr><td><strong>Serviço recorrente avançado</strong></td><td>Você como head comercial da empresa</td><td>R$ [serviço avançado]/mês</td></tr>
+            <tr><td><strong>Workshops e treinamentos</strong></td><td>Escala — vende conhecimento em grupo</td><td>R$ [workshop]/entrega</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Precificação por valor — não por hora</h3>
+      <div class="cards-2">
+        <div class="card">
+          <div class="card-label">❌ Como não precificar</div>
+          <div class="card-title">Por hora ou custo + margem</div>
+          <div class="card-text">Por hora pune eficiência — quanto melhor você fica, menos horas usa e menos ganha. Por custo ignora o valor gerado.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">✓ Como precificar</div>
+          <div class="card-title">Por valor gerado</div>
+          <div class="card-text">O preço é uma fração do resultado que o cliente consegue. Se você vai gerar R$ 50k de receita adicional, cobrar R$ 8k é óbvio para o cliente.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="takeaways">
+      <div class="takeaways-label">✦ O que levar deste módulo</div>
+      <ul class="takeaways-list">
+        <li><strong>Metodologia documentada elimina comparação de preço.</strong> Quando você tem um processo com nome próprio, o cliente não consegue comparar com uma proposta genérica.</li>
+        <li><strong>Cases aumentam seu preço.</strong> Cada resultado documentado justifica cobrar mais.</li>
+        <li><strong>Nunca dê desconto no escopo.</strong> Se o cliente pede desconto, reduza o escopo — não o preço.</li>
+      </ul>
+    </div>
+
+    <div class="activity">
+      <div class="activity-label">✦ Atividade prática — Módulo 6</div>
+      <div class="activity-title">Escreva o seu posicionamento em 3 linhas</div>
+      <p class="activity-text">Use o framework dos 3 eixos para criar uma frase de posicionamento que você possa usar no LinkedIn, no Instagram e na abertura de qualquer reunião.</p>
+      <ul>
+        <li>Escreva: "Ajudo [quem específico] a resolver [problema específico] para alcançar [resultado em números]."</li>
+        <li>Teste com 3 pessoas do seu ICP — elas imediatamente se identificam?</li>
+        <li>Calcule o impacto financeiro do principal problema que você resolve para o cliente médio</li>
+        <li>Com base nisso, defina o seu ticket mínimo justo para o produto principal</li>
+        <li>Atualize o bio do Instagram e a headline do LinkedIn com esse posicionamento</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ M7 ════════════════════════════════ -->
+<section class="module" id="m7">
+  <div class="module-inner">
+    <div class="module-header">
+      <div class="module-eyebrow">
+        <span class="module-num">Módulo 07 · Rotina</span>
+        <span class="module-tag">Rotina por porte · Como ensinar · Checklists</span>
+        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+      </div>
+      <h2 class="module-title">Rotina<br><em>comercial</em></h2>
+      <p class="module-intro">Processo sem rotina não existe na prática. Você pode ter o melhor script do mundo, o pipeline mais organizado, e tudo cair por terra se o vendedor não souber o que fazer das 9h às 18h.</p>
+    </div>
+
+    <div class="quote">
+      <p>"Rotina comercial não é agenda lotada. É a sequência de ações certas, no momento certo, com a frequência certa — que gera resultado previsível independente do humor ou da memória de quem executa."</p>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Os 3 horizontes de tempo</h3>
+      <div class="cards-2">
+        <div class="card"><div class="card-label">Diário</div><div class="card-title">O que acontece todo dia</div><div class="card-text">Prospecção ativa, follow-ups da cadência, atualização do CRM, respostas de leads, preparação para reuniões.</div></div>
+        <div class="card"><div class="card-label">Semanal</div><div class="card-title">O que acontece toda semana</div><div class="card-text">Revisão do pipeline, análise de métricas, reunião de alinhamento, planejamento dos próximos 5 dias.</div></div>
+        <div class="card"><div class="card-label">Mensal</div><div class="card-title">O que acontece todo mês</div><div class="card-text">Review de resultado vs meta, análise de motivos de perda, ajuste de script e cadência, planejamento de receita.</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Checklist de rotina diária</h3>
+      <h4>Vendedor / Solo</h4>
+      <ul class="checklist">
+        <li>5 prospecções novas (WhatsApp, LinkedIn ou e-mail)</li>
+        <li>Follow-ups de todos os leads em cadência ativa</li>
+        <li>Confirmação das reuniões de amanhã</li>
+        <li>Atualização do CRM com status e próximo passo de cada lead</li>
+        <li>1 conteúdo publicado ou 5 comentários estratégicos (se faz inbound)</li>
+      </ul>
+      <h4>Gestor de time</h4>
+      <ul class="checklist">
+        <li>Verificar atualizações do CRM do time</li>
+        <li>Identificar leads parados há mais de 5 dias e acionar o vendedor</li>
+        <li>Analisar qual etapa do funil está com mais leads parados</li>
+        <li>Dar feedback para pelo menos 1 vendedor por dia</li>
+      </ul>
+      <h4>Semana — toda segunda-feira</h4>
+      <ul class="checklist">
+        <li>Reunião de pipeline 30 min com pauta fixa</li>
+        <li>Revisar métricas da semana anterior vs meta</li>
+        <li>Definir top 3 prioridades da semana</li>
+        <li>Planejar prospecções e follow-ups dos próximos 5 dias</li>
+      </ul>
+    </div>
+
+    <div class="takeaways">
+      <div class="takeaways-label">✦ O que levar deste módulo</div>
+      <ul class="takeaways-list">
+        <li><strong>Rotina simples executada consistentemente bate rotina complexa executada às vezes.</strong> Quanto mais simples, mais chance de virar hábito.</li>
+        <li><strong>Prospecção vira compromisso fixo na agenda.</strong> Quem prospecta só quando "sobra tempo" não prospecta.</li>
+        <li><strong>Problema de rotina quase sempre é problema de clareza.</strong> Vendedor que não prospecta geralmente não sabe exatamente o que fazer — não é preguiça.</li>
+      </ul>
+    </div>
+
+    <div class="activity">
+      <div class="activity-label">✦ Atividade prática — Módulo 7</div>
+      <div class="activity-title">Monte a sua rotina comercial da próxima semana</div>
+      <p class="activity-text">Abra a sua agenda agora e bloqueie os horários das atividades comerciais para os próximos 5 dias. Trate esses blocos como reuniões com cliente — eles não movem.</p>
+      <ul>
+        <li>Bloquear 1 hora de prospecção ativa toda manhã (antes de qualquer reunião)</li>
+        <li>Bloquear 20 minutos de follow-ups todo final de tarde</li>
+        <li>Bloquear 15 minutos para atualizar o CRM ao final do dia</li>
+        <li>Bloquear segunda-feira de manhã para revisão de pipeline</li>
+        <li>Ao final da semana: o que executou? O que não executou? Por quê?</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ M8 ════════════════════════════════ -->
+<section class="module" id="m8">
+  <div class="module-inner">
+    <div class="module-header">
+      <div class="module-eyebrow">
+        <span class="module-num">Módulo 08 · Scripts Avançados</span>
+        <span class="module-tag">RPQ · DM · Pré-qualificação · Sessão estratégica · Downsell</span>
+        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+      </div>
+      <h2 class="module-title">Scripts avançados e<br><em>sessão estratégica</em></h2>
+      <p class="module-intro">Saber o processo é uma coisa. Ter as palavras certas no momento certo é outra. Este módulo reúne os scripts práticos para cada situação — da primeira DM ao fechamento — e o roteiro completo da sessão estratégica.</p>
+    </div>
+
+    <div class="quote">
+      <p>"A venda não começa na reunião. Ela começa na primeira mensagem — e termina quando você para de acompanhar."</p>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">O método RPQ — Reconhecer, Personalizar, Questionar</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">R</div><div class="step-content"><div class="step-title">Reconhecer — valide a emoção antes de avançar</div><div class="step-text">"Faz sentido demais isso que você trouxe." · "Caramba, isso é frustrante mesmo." · "Entendo perfeitamente."</div></div></div>
+        <div class="step"><div class="step-num">P</div><div class="step-content"><div class="step-title">Personalizar — gere conexão real</div><div class="step-text">"É muito difícil dedicar tanto tempo e não ver retorno — já vi isso acontecer com outros clientes do mesmo segmento, então você não está sozinho nisso."</div></div></div>
+        <div class="step"><div class="step-num">Q</div><div class="step-content"><div class="step-title">Questionar — a pergunta intencional</div><div class="step-text">"Indo direto ao ponto — o que te fez perceber que precisa resolver isso agora?"</div></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Scripts de DM — por situação</h3>
+      <div class="script-block">
+        <div class="script-label">Novo seguidor — primeiros 2–3 dias</div>
+        <div class="script-text">"Oi [nome]! Vi que chegou por aqui recentemente — só passando para dar boas-vindas. Aqui falamos sobre estruturação comercial. Por curiosidade, o que te trouxe até o perfil?"</div>
+      </div>
+      <div class="script-block">
+        <div class="script-label">Lead frio — abordagem proativa</div>
+        <div class="script-text">"Oi [nome], pode achar aleatório porque você não sabe quem eu sou — mas vou ser direta: trabalho com estruturação comercial para empresas de [segmento], especialmente quando o processo de vendas ainda depende muito do fundador. Vi o perfil de vocês e faz sentido abrirmos esse canal. Você está aberta a uma conversa sobre isso? Zero pressão."</div>
+      </div>
+      <div class="script-block">
+        <div class="script-label">Lead que engaja mas nunca comprou</div>
+        <div class="script-text">"[Nome], a gente já quase se conhece de tanto que você acompanha por aqui — mas nunca paramos para conversar de verdade. Queria entender como está o comercial de vocês hoje. O que está acontecendo por lá em termos de vendas?"</div>
+      </div>
+      <div class="script-block">
+        <div class="script-label">Reativação de cliente antigo</div>
+        <div class="script-text">"Oi [nome], tô passando pra dar um oi e entender como está o negócio. Desde que trabalhamos juntos, muita coisa mudou — e geralmente o que resolvemos abre espaço para novos desafios aparecerem. O que está te ocupando mais agora no comercial?"</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">A sessão estratégica — do diagnóstico ao fechamento</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Conexão rápida — 2 minutos</div><div class="step-text">A conexão verdadeira começa antes da reunião — no conteúdo, na DM, na ligação de pré-qualificação. Aqui é só confirmar o que já existe.</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Alinhamento de expectativas — acordo de decisão</div><div class="step-text">Você define as regras do jogo logo no início. O lead sabe que ao final haverá uma decisão — sim ou não. Isso elimina o "vou pensar".</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Diagnóstico — SPIN aplicado</div><div class="step-text">O coração da reunião. 70% do tempo o cliente fala. Você faz as perguntas certas para ele articular a dor, calcular o custo do problema e pedir a solução.</div></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Pitch de valor — conectado às dores reveladas</div><div class="step-text">Você apresenta a solução usando as palavras que o próprio cliente usou no diagnóstico. Não é lista de entregáveis — é conexão direta entre o problema dele e o que você faz.</div></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-content"><div class="step-title">Investimento + fechamento</div><div class="step-text">Você apresenta o valor após construir todo o contexto. Com o termômetro de 0 a 10 você confirma o engajamento antes de falar o preço.</div></div></div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-label">Acordo de decisão — abertura da sessão</div>
+        <div class="script-text">"Oi [nome], obrigada pelo tempo. Revisei tudo que você me trouxe antes e tenho bastante clareza do cenário. Meu objetivo aqui é simples: entender os detalhes do processo de vocês, e se estivermos na mesma página, apresento a estratégia e o investimento. No final decidimos juntos — um sim ou um não para esse projeto. Tudo bem assim?"</div>
+      </div>
+      <div class="script-block">
+        <div class="script-label">O termômetro — antes de falar o preço</div>
+        <div class="script-text">"Numa escala de 0 a 10 — sendo 0 'não é o que eu estava buscando' e 10 'é exatamente o que precisamos resolver agora' — como você está se sentindo em relação ao que apresentei?"
+
+<strong>8, 9 ou 10:</strong> apresente o investimento.
+<strong>Abaixo de 8:</strong> "O que faltou para chegar mais perto do 10?" Resolva a dúvida antes de continuar.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">As palavras certas fazem diferença</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Troque isso</th><th>Por isso</th></tr></thead>
+          <tbody>
+            <tr><td>"Qual horário fica melhor para você?"</td><td>"Tenho disponibilidade amanhã às 14h — funciona?"</td></tr>
+            <tr><td>"Eu acho que pode funcionar..."</td><td>"Eu te recomendo começar por [X]."</td></tr>
+            <tr><td>"Posso fazer um desconto"</td><td>"Posso oferecer uma condição especial para esse projeto."</td></tr>
+            <tr><td>"Aguardo seu retorno"</td><td>"Te ligo quinta às 10h para batermos o martelo."</td></tr>
+            <tr><td>"Orçamento"</td><td>"Proposta"</td></tr>
+            <tr><td>"Você viu minha última mensagem?"</td><td>"Estava organizando as conversas e vi que essa ficou sem resposta — ela se perdeu aí também?"</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="takeaways">
+      <div class="takeaways-label">✦ O que levar deste módulo</div>
+      <ul class="takeaways-list">
+        <li><strong>RPQ antes de qualquer pergunta de qualificação.</strong> Reconhecer e personalizar antes de questionar transforma interrogatório em conversa.</li>
+        <li><strong>Acordo de decisão desde o agendamento.</strong> O lead precisa saber antes da reunião que haverá uma decisão — sim ou não.</li>
+        <li><strong>O termômetro de 0 a 10 antes do preço.</strong> Nunca fale o valor sem confirmar o engajamento.</li>
+        <li><strong>Silêncio após o preço.</strong> Quem fala primeiro depois de apresentar o investimento, perde.</li>
+      </ul>
+    </div>
+
+    <div class="activity">
+      <div class="activity-label">✦ Atividade prática — Módulo 8</div>
+      <div class="activity-title">Simule a sessão estratégica completa</div>
+      <p class="activity-text">Peça para alguém de confiança simular o papel de cliente enquanto você conduz a sessão do início ao fim. Grave o áudio e depois ouça criticamente.</p>
+      <ul>
+        <li>Grave a abertura com o acordo de decisão — soou natural?</li>
+        <li>Faça as perguntas SPIN — você deixou o "cliente" falar 70% do tempo?</li>
+        <li>Aplique o termômetro antes de falar o preço</li>
+        <li>Apresente o preço e fique em silêncio — conte quantos segundos você aguenta</li>
+        <li>Identifique os 2 momentos em que você se sentiu mais inseguro e trabalhe eles</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ M9 ════════════════════════════════ -->
+<section class="module" id="m9">
+  <div class="module-inner">
+    <div class="module-header">
+      <div class="module-eyebrow">
+        <span class="module-num">Módulo 09 · Canais de Aquisição</span>
+        <span class="module-tag">Matriz de Canais · Outbound · Inbound · Parcerias</span>
+        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+      </div>
+      <h2 class="module-title">Canais de aquisição —<br><em>o motor de leads</em></h2>
+      <p class="module-intro">Canal errado para o ICP errado é dinheiro e tempo jogados fora. O problema não é a falta de canal — é a falta de clareza sobre qual canal faz mais sentido para o seu ticket, o seu cliente e o momento do seu negócio.</p>
+    </div>
+
+    <div class="quote">
+      <p>"Não existe canal ruim — existe canal errado para o momento. Prospecção ativa com ticket de R$ 500 destrói sua margem. Cold email para decisores sênior de empresas de 100 funcionários pode ser o melhor investimento que você faz."</p>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Matriz de canais — escolha pelo ticket e pelo ICP</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Canal</th><th>Custo</th><th>Velocidade</th><th>Ticket ideal</th><th>Melhor para</th></tr></thead>
+          <tbody>
+            <tr><td><strong>WhatsApp ativo</strong></td><td>Baixo</td><td>Rápida (dias)</td><td>Qualquer</td><td>Quem conhece o ICP e tem lista</td></tr>
+            <tr><td><strong>LinkedIn DM</strong></td><td>Baixo</td><td>Média (semanas)</td><td>R$ 3k+</td><td>B2B com decisores C-level</td></tr>
+            <tr><td><strong>Cold email</strong></td><td>Baixo</td><td>Média (semanas)</td><td>R$ 5k+</td><td>Escala com personalização</td></tr>
+            <tr><td><strong>Instagram orgânico</strong></td><td>Tempo</td><td>Lenta (meses)</td><td>Qualquer</td><td>Construção de autoridade + inbound</td></tr>
+            <tr><td><strong>Tráfego pago</strong></td><td>Alto</td><td>Rápida (dias)</td><td>R$ 1k+</td><td>Testar mensagem, gerar volume</td></tr>
+            <tr><td><strong>Indicação ativa</strong></td><td>Zero</td><td>Muito rápida</td><td>Qualquer</td><td>Quem já tem clientes satisfeitos</td></tr>
+            <tr><td><strong>Parcerias/co-marketing</strong></td><td>Baixo</td><td>Média</td><td>R$ 2k+</td><td>Acessar audiência de terceiros</td></tr>
+            <tr><td><strong>Eventos e palestras</strong></td><td>Médio</td><td>Lenta</td><td>R$ 5k+</td><td>Posicionamento + autoridade</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Pilar Outbound — prospecção ativa detalhada</h3>
+      <h4>Cold email em escala com personalização</h4>
+      <p class="section-text">Cold email funciona quando tem 3 elementos: <strong>gancho específico</strong> (mostra que você pesquisou), <strong>conexão com dor</strong> (fala sobre o problema dele, não sobre você) e <strong>CTA de baixo atrito</strong> (uma pergunta, não um pedido de 1 hora de reunião).</p>
+      <div class="script-block">
+        <div class="script-label">Estrutura de cold email de alta taxa de abertura</div>
+        <div class="script-text">Assunto: [dado específico sobre a empresa deles]
+
+"Oi [nome],
+
+Vi que [dado pesquisado — crescimento, produto novo, contratação recente].
+
+Trabalho com [o que você faz] para empresas no perfil de vocês — especialmente quando [dor específica do segmento].
+
+Faz sentido conversarmos 15 minutos essa semana?
+
+[seu nome] · Lune Co."</div>
+      </div>
+
+      <h4>LinkedIn — prospecção estratégica em 3 passos</h4>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Pesquise antes de conectar</div><div class="step-text">Leia o perfil, veja os posts recentes, identifique o cargo e o momento da empresa. Use isso na nota de conexão.</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Conecte com nota personalizada</div><div class="step-text">"Oi [nome], vi seu post sobre [tema específico] e faz sentido nos conectarmos — trabalho com [área relacionada] para empresas como a sua."</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Abra a conversa com curiosidade genuína</div><div class="step-text">Após aceitar: não pitch imediato. "Oi [nome], obrigada pela conexão. Vi que vocês [contexto do perfil] — esse desafio de [X] aparece aí também?"</div></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Pilar Inbound — conteúdo que atrai e converte</h3>
+      <h4>Conteúdo de fundo de funil — o que realmente gera lead quente</h4>
+      <p class="section-text">A maioria dos criadores produz conteúdo de topo de funil (educativo, amplo). O conteúdo de fundo de funil é o que gera DM de quem quer comprar — não de quem quer aprender.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tipo</th><th>Exemplo</th><th>Quem atrai</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Resultado de cliente</strong></td><td>"Em 45 dias, [empresa X] saiu de 15% para 38% de taxa de fechamento."</td><td>Nível 4–5 de consciência</td></tr>
+            <tr><td><strong>Diagnóstico público</strong></td><td>"3 sinais de que seu processo comercial está com gargalo no follow-up"</td><td>Nível 3 de consciência</td></tr>
+            <tr><td><strong>Bastidor do processo</strong></td><td>"Como conduzo uma reunião de diagnóstico de 40 minutos"</td><td>Nível 4 de consciência</td></tr>
+            <tr><td><strong>Comparativo antes/depois</strong></td><td>"Como era o pipeline antes e como ficou depois de 60 dias"</td><td>Nível 4–5 de consciência</td></tr>
+            <tr><td><strong>CTA direto com contexto</strong></td><td>"Se você tem [dor específica], eu faço diagnóstico gratuito de 30 min. Link na bio."</td><td>Nível 5 de consciência</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Pilar de Parcerias — programa de indicações estruturado</h3>
+      <p class="section-text">Indicação não estruturada é sorte. Indicação estruturada é um canal de aquisição previsível.</p>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Identifique os parceiros certos</div><div class="step-text">Quem atende o mesmo ICP mas não compete com você? Agências de marketing, contadores, coaches de negócio, advogados empresariais — todos atendem donos de empresa.</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Defina o modelo de incentivo</div><div class="step-text">Comissão por fechamento (10–20% do contrato), reciprocidade de indicação, ou co-marketing (webinar, conteúdo conjunto). Seja claro antes de começar.</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Facilite a indicação com um script</div><div class="step-text">"Quando alguém que você conhece mencionar dificuldade com vendas ou processo comercial, você pode me apresentar assim: [script de apresentação de 2 linhas]."</div></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Feche o ciclo — agradeça e atualize</div><div class="step-text">Avise o parceiro o que aconteceu com a indicação — fechou ou não. Parceiro que não recebe feedback para de indicar.</div></div></div>
+      </div>
+    </div>
+
+    <div class="case-study">
+      <div class="case-label">📋 Caso ilustrativo</div>
+      <div class="case-title">Agência de Marketing Digital — Florianópolis</div>
+      <p class="section-text" style="font-size:0.875rem;">A agência tinha 100% dos novos clientes por indicação passiva — esperava o telefone tocar. Sem previsibilidade, sem meta, sem controle. Em 60 dias de trabalho, estruturamos 3 canais simultâneos: LinkedIn ativo (50 mensagens/semana para decisores de empresas de médio porte), programa de parceria com 4 contadores da região e sequência de conteúdo de fundo de funil no Instagram.</p>
+      <div class="case-results">
+        <div class="case-metric"><span class="case-metric-num">+4</span><span class="case-metric-label">novos leads qualificados por semana</span></div>
+        <div class="case-metric"><span class="case-metric-num">3x</span><span class="case-metric-label">crescimento no pipeline em 45 dias</span></div>
+        <div class="case-metric"><span class="case-metric-num">2</span><span class="case-metric-label">clientes fechados via parceria no primeiro mês</span></div>
+      </div>
+    </div>
+
+    <div class="takeaways">
+      <div class="takeaways-label">✦ O que levar deste módulo</div>
+      <ul class="takeaways-list">
+        <li><strong>Comece com 2 canais, não 6.</strong> Profundidade em poucos canais gera mais resultado do que presença superficial em muitos.</li>
+        <li><strong>Canal + mensagem certa = resultado.</strong> Mudar só o canal sem ajustar a mensagem não funciona.</li>
+        <li><strong>Indicação estruturada é o canal mais barato e mais qualificado.</strong> Mas precisa ser cultivado — não acontece sozinho.</li>
+      </ul>
+    </div>
+
+    <div class="activity">
+      <div class="activity-label">✦ Atividade prática — Módulo 9</div>
+      <div class="activity-title">Defina os 2 canais principais da sua estratégia de aquisição</div>
+      <p class="activity-text">Com base no seu ICP, ticket médio e momento do negócio, escolha os 2 canais que fazem mais sentido agora — e construa um plano de 30 dias para cada.</p>
+      <ul>
+        <li>Liste os 3 canais mais adequados para o seu ticket e ICP</li>
+        <li>Escolha os 2 que você consegue executar consistentemente por 30 dias</li>
+        <li>Defina meta de atividade por canal (ex: 30 conexões/semana no LinkedIn)</li>
+        <li>Identifique 3 potenciais parceiros de indicação e entre em contato essa semana</li>
+        <li>Ao final de 30 dias: qual canal gerou mais leads qualificados? Dobre nele.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ M10 ════════════════════════════════ -->
+<section class="module" id="m10">
+  <div class="module-inner">
+    <div class="module-header">
+      <div class="module-eyebrow">
+        <span class="module-num">Módulo 10 · Pós-Venda e Expansão</span>
+        <span class="module-tag">Upsell · Cross-sell · Régua 30/60/90 · Prova Social</span>
+        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+      </div>
+      <h2 class="module-title">Pós-venda e expansão —<br><em>o lucro real</em></h2>
+      <p class="module-intro">A etapa mais lucrativa do processo comercial é a que a maioria ignora. Vender mais para quem já confia em você custa até 7 vezes menos do que adquirir um cliente novo — e gera indicações que fecham sem esforço.</p>
+    </div>
+
+    <div class="quote">
+      <p>"O fechamento não é o fim da venda — é o começo do relacionamento. Quem cuida bem de quem já comprou não precisa prospectar tanto."</p>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Estratégias de Upsell e Cross-sell</h3>
+      <div class="cards-2">
+        <div class="card">
+          <div class="card-label">Upsell</div>
+          <div class="card-title">Expandir o que já existe</div>
+          <div class="card-text">Oferecer uma versão mais completa ou uma continuidade do que o cliente já comprou. Ex: cliente que fez o diagnóstico → oferecer a implementação. Cliente em projeto pontual → oferecer retainer mensal.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Cross-sell</div>
+          <div class="card-title">Resolver o próximo problema</div>
+          <div class="card-text">Oferecer algo complementar ao que ele comprou. Ex: cliente que estruturou o processo → oferecer treinamento do time. Cliente com processo rodando → oferecer gestão de métricas.</div>
+        </div>
+      </div>
+
+      <div class="callout callout-gold">
+        <strong>⏰ O momento certo para oferecer</strong>
+        Nunca ofereça upsell antes de entregar o primeiro resultado. O timing certo é quando o cliente ainda está na empolgação do que funcionou — geralmente na 3ª ou 4ª semana do projeto.
+      </div>
+
+      <div class="script-block">
+        <div class="script-label">Script de upsell natural — pós-resultado</div>
+        <div class="script-text">"[Nome], a gente acabou de resolver [gargalo X]. Olhando para o próximo passo, o que faz mais sentido agora é [próximo problema natural]. Quero te propor uma coisa — posso te mandar uma proposta rápida para isso ou prefere que a gente revise juntos na próxima call?"</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Régua de relacionamento — o que acontece nos primeiros 90 dias</h3>
+
+      <div class="cadence">
+        <div class="cadence-item">
+          <div class="cadence-day">D1</div>
+          <div class="cadence-content">
+            <div class="cadence-label">Boas-vindas e confirmação de expectativas</div>
+            <div class="cadence-text">Mensagem de boas-vindas com o resumo do que foi combinado, próximos passos e como vai funcionar a comunicação. Apresente o processo de forma clara — cliente desorientado é cliente insatisfeito.</div>
+          </div>
+        </div>
+        <div class="cadence-item">
+          <div class="cadence-day">D7</div>
+          <div class="cadence-content">
+            <div class="cadence-label">Check-in de primeira semana</div>
+            <div class="cadence-text">"Como está sendo a experiência até agora? Alguma dúvida que surgiu?" — Uma pergunta aberta que abre espaço para ajuste rápido antes de virar problema.</div>
+          </div>
+        </div>
+        <div class="cadence-item">
+          <div class="cadence-day">D30</div>
+          <div class="cadence-content">
+            <div class="cadence-label">Review de 30 dias — primeiros resultados</div>
+            <div class="cadence-text">Reunião de revisão: o que foi implementado, o que está funcionando, o que precisa ajustar. É aqui que você colhe o depoimento — enquanto a energia ainda está alta.</div>
+          </div>
+        </div>
+        <div class="cadence-item">
+          <div class="cadence-day">D60</div>
+          <div class="cadence-content">
+            <div class="cadence-label">Review de 60 dias — ajuste de rota</div>
+            <div class="cadence-text">Compare métricas antes e depois. Identifique o que mudou. Introduza o próximo passo natural — este é o momento de fazer a oferta de upsell ou expansão de escopo.</div>
+          </div>
+        </div>
+        <div class="cadence-item">
+          <div class="cadence-day">D90</div>
+          <div class="cadence-content">
+            <div class="cadence-label">Review de 90 dias — decisão de continuidade</div>
+            <div class="cadence-text">Apresente os resultados consolidados. Se faz sentido continuar: proponha o próximo contrato. Peça indicação formal — "Você conhece alguém que esteja passando pelo mesmo desafio que você tinha?"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Coleta de prova social</h3>
+      <p class="section-text">Depoimento pedido na hora errada parece obrigação. Pedido na hora certa — quando o cliente está animado com um resultado — é natural e honesto.</p>
+
+      <div class="script-block">
+        <div class="script-label">Script para pedir depoimento — por escrito</div>
+        <div class="script-text">"[Nome], estou muito feliz com os resultados que vocês tiveram. Posso te pedir um favor? Um depoimento curto — 3 linhas sobre o desafio que vocês tinham, o que mudou e o que você recomendaria para alguém em situação parecida. Pode ser aqui mesmo por mensagem, eu formato depois."</div>
+      </div>
+      <div class="script-block">
+        <div class="script-label">Script para pedir autorização de uso de logo</div>
+        <div class="script-text">"[Nome], posso usar o logo de vocês na minha página como empresa parceira? Fica a critério de vocês — é só para mostrar quem já confiou no trabalho da Lune Co."</div>
+      </div>
+
+      <div class="callout callout-tip">
+        <strong>💡 O depoimento perfeito tem 3 elementos</strong>
+        1. O antes — qual era o problema ou a situação. 2. O que mudou — o resultado específico. 3. A recomendação — para quem e por quê indicaria. Oriente o cliente com essas 3 perguntas e você vai ter um depoimento que vende.
+      </div>
+    </div>
+
+    <div class="case-study">
+      <div class="case-label">📋 Caso ilustrativo</div>
+      <div class="case-title">Empresa de Software B2B — ciclo de expansão</div>
+      <p class="section-text" style="font-size:0.875rem;">Empresa fechou o projeto principal de estruturação em R$ 12.000. Com a régua de 30/60/90 dias bem executada, no D30 o cliente estava animado com a primeira melhora na taxa de conversão (+12pp). No D60, foi natural propor o treinamento do time de vendas — R$ 4.500 adicionais. No D90, o cliente renovou como retainer mensal de R$ 2.800. O projeto de R$ 12k virou R$ 19.300 em LTV de 6 meses — sem nenhum custo de aquisição adicional.</p>
+      <div class="case-results">
+        <div class="case-metric"><span class="case-metric-num">R$12k</span><span class="case-metric-label">contrato original</span></div>
+        <div class="case-metric"><span class="case-metric-num">R$19,3k</span><span class="case-metric-label">LTV em 6 meses</span></div>
+        <div class="case-metric"><span class="case-metric-num">R$0</span><span class="case-metric-label">custo de aquisição adicional</span></div>
+      </div>
+    </div>
+
+    <div class="takeaways">
+      <div class="takeaways-label">✦ O que levar deste módulo</div>
+      <ul class="takeaways-list">
+        <li><strong>A venda não termina no fechamento — começa no onboarding.</strong> O que acontece nos primeiros 7 dias define se o cliente vai indicar ou reclamar.</li>
+        <li><strong>Peça depoimento enquanto a empolgação está alta.</strong> D30 é o melhor momento — resultado apareceu, o cliente ainda está engajado.</li>
+        <li><strong>Upsell natural é mais fácil do que fechar um cliente novo.</strong> O cliente já confia — só precisa perceber que o próximo problema também tem solução com você.</li>
+      </ul>
+    </div>
+
+    <div class="activity">
+      <div class="activity-label">✦ Atividade prática — Módulo 10</div>
+      <div class="activity-title">Monte a régua de relacionamento do seu próximo cliente</div>
+      <p class="activity-text">Antes de assinar o próximo contrato, já defina o que vai acontecer nos D1, D7, D30, D60 e D90 — e coloque como task no seu CRM.</p>
+      <ul>
+        <li>Escreva a mensagem de boas-vindas do D1 agora (para usar no próximo cliente)</li>
+        <li>Liste os 3 marcos de resultado que você vai revisar com o cliente no D30</li>
+        <li>Defina qual seria o upsell ou cross-sell natural para o seu produto principal</li>
+        <li>Escreva a pergunta que você vai usar para pedir o depoimento no D30</li>
+        <li>Entre em contato com 1 cliente atual e peça um depoimento usando o script acima</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ M11 ════════════════════════════════ -->
+<section class="module" id="m11">
+  <div class="module-inner">
+    <div class="module-header">
+      <div class="module-eyebrow">
+        <span class="module-num">Módulo 11 · Tech Stack e IA</span>
+        <span class="module-tag">IA no Comercial · CRM · Automação · Ferramentas</span>
+        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+      </div>
+      <h2 class="module-title">Tech stack e<br><em>inteligência artificial</em></h2>
+      <p class="module-intro">Ferramenta não substitui processo. Mas a combinação certa de ferramentas com processo bem definido multiplica o que você consegue fazer sozinho — ou com um time pequeno.</p>
+    </div>
+
+    <div class="quote">
+      <p>"IA não fecha venda. IA te dá tempo para focar no que fecha venda: a conversa, o diagnóstico, o relacionamento."</p>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">IA no comercial — guia prático de prompts</h3>
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">01</span><span class="playbook-header-title">Pesquisa de lead antes da reunião</span></div>
+        <div class="playbook-body">
+          <div class="script-block"><div class="script-label">Prompt</div><div class="script-text">"Analise o perfil da empresa [nome da empresa] com site [URL] e LinkedIn [URL]. Me diga: qual parece ser o momento atual do negócio, quais são os possíveis desafios comerciais para uma empresa desse porte e setor, e quais perguntas eu deveria fazer na reunião de diagnóstico para revelar esses problemas."</div></div>
+        </div>
+      </div>
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">02</span><span class="playbook-header-title">Personalização de mensagem de prospecção</span></div>
+        <div class="playbook-body">
+          <div class="script-block"><div class="script-label">Prompt</div><div class="script-text">"Com base nessas informações sobre [nome do lead] e a empresa [empresa]: [cole aqui o que você encontrou no LinkedIn/site]. Escreva uma mensagem de WhatsApp de prospecção com 4 linhas máximo, tom direto e humano, que mostre que pesquisei sobre eles e abre conversa sem pressão."</div></div>
+        </div>
+      </div>
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">03</span><span class="playbook-header-title">Estrutura de proposta comercial</span></div>
+        <div class="playbook-body">
+          <div class="script-block"><div class="script-label">Prompt</div><div class="script-text">"Com base no diagnóstico dessa reunião: [resumo do que o cliente disse, gargalos identificados, impacto financeiro estimado]. Escreva a estrutura de uma proposta comercial para consultoria de estruturação comercial que conecte cada entregável ao problema específico que o cliente mencionou. Tom consultivo, sem jargão excessivo."</div></div>
+        </div>
+      </div>
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">04</span><span class="playbook-header-title">Análise de motivos de perda</span></div>
+        <div class="playbook-body">
+          <div class="script-block"><div class="script-label">Prompt</div><div class="script-text">"Analise esses 10 registros de leads perdidos no meu CRM: [cole os dados — empresa, etapa que parou, motivo registrado]. Identifique padrões, me diga qual etapa do funil concentra mais perdas e sugira 3 ações concretas para melhorar a conversão."</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Ferramentas essenciais — lista curada</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Função</th><th>Ferramenta(s)</th><th>Para quê</th><th>Custo</th></tr></thead>
+          <tbody>
+            <tr><td><strong>CRM</strong></td><td>HubSpot Free, Notion, Pipedrive</td><td>Gestão de pipeline e leads</td><td>Gratuito / ~R$100/mês</td></tr>
+            <tr><td><strong>Localizar contatos</strong></td><td>Apollo.io, Hunter.io, LinkedIn Sales Nav</td><td>Encontrar e-mail e contato de leads</td><td>Freemium / ~R$200/mês</td></tr>
+            <tr><td><strong>Automação de e-mail</strong></td><td>Instantly, Lemlist, Woodpecker</td><td>Cold email em escala com personalização</td><td>~R$150–400/mês</td></tr>
+            <tr><td><strong>IA para texto</strong></td><td>Claude, ChatGPT, Gemini</td><td>Pesquisa, scripts, propostas, análise</td><td>Gratuito / ~R$100/mês</td></tr>
+            <tr><td><strong>Agendamento</strong></td><td>Calendly, Cal.com</td><td>Eliminar o vai-e-vem de agenda</td><td>Gratuito / ~R$50/mês</td></tr>
+            <tr><td><strong>Proposta/assinatura</strong></td><td>Notion, Canva, DocuSign</td><td>Criar e assinar propostas</td><td>Gratuito / ~R$80/mês</td></tr>
+            <tr><td><strong>WhatsApp em escala</strong></td><td>Wati, Zapi, Z-API</td><td>Gestão de conversas e follow-up</td><td>~R$100–300/mês</td></tr>
+            <tr><td><strong>Analytics</strong></td><td>Google Analytics, Hotjar</td><td>Entender comportamento no site/landing</td><td>Gratuito</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Configuração de CRM — o que não pode faltar</h3>
+      <p class="section-text">CRM não funciona por falta de uso, não por falta de recurso. A configuração mais simples executada todos os dias bate a mais complexa usada uma vez por semana.</p>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Etapas do pipeline alinhadas ao seu processo real</div><div class="step-text">As etapas devem refletir exatamente o que acontece no seu funil — não um template genérico. Use: Prospecção → Interesse → Diagnóstico agendado → Proposta enviada → Negociação → Fechado/Perdido.</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Campo "próxima ação" obrigatório</div><div class="step-text">Todo lead precisa ter a próxima ação registrada e com data. Lead sem próxima ação fica órfão e morre. Nunca deixe o CRM sem saber o que fazer com cada contato.</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Campo "motivo de perda" obrigatório</div><div class="step-text">Dado mais valioso do CRM. Sem isso você não sabe onde melhorar. Os motivos mais comuns: preço, timing, concorrente, sem fit, sem urgência, sem resposta.</div></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Tags de origem do lead</div><div class="step-text">Saiba de onde veio cada lead — Instagram, LinkedIn, indicação, cold email, evento. Isso revela qual canal traz mais lead qualificado, não apenas mais volume.</div></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-content"><div class="step-title">Atualização diária — 15 minutos ao final do dia</div><div class="step-text">O hábito de atualizar diariamente é o que faz o CRM funcionar. Sem isso, ele vira um cemitério de leads.</div></div></div>
+      </div>
+    </div>
+
+    <div class="takeaways">
+      <div class="takeaways-label">✦ O que levar deste módulo</div>
+      <ul class="takeaways-list">
+        <li><strong>Comece simples.</strong> Uma planilha bem usada supera um CRM caro ignorado. Só mude de ferramenta quando a atual não aguenta mais o volume.</li>
+        <li><strong>IA é assistente, não estrategista.</strong> Use para pesquisar, escrever rascunhos e analisar dados — mas a decisão e a conversa são suas.</li>
+        <li><strong>Motivo de perda é o dado mais valioso que você tem.</strong> Registre sempre, analise mensalmente, ajuste o processo.</li>
+      </ul>
+    </div>
+
+    <div class="activity">
+      <div class="activity-label">✦ Atividade prática — Módulo 11</div>
+      <div class="activity-title">Configure o seu CRM em 1 hora</div>
+      <p class="activity-text">Escolha uma ferramenta (pode ser o Notion gratuito) e configure o pipeline com as etapas do seu processo real. Migre os leads que você tem hoje para as etapas corretas e defina a próxima ação para cada um.</p>
+      <ul>
+        <li>Escolha a ferramenta de CRM adequada para o seu momento</li>
+        <li>Configure as 6 etapas do pipeline com os critérios de entrada de cada uma</li>
+        <li>Cadastre todos os leads ativos com status e próxima ação</li>
+        <li>Teste um dos prompts de IA acima com um lead real</li>
+        <li>Defina: qual horário do dia você vai atualizar o CRM? Coloque no calendário agora.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ M12 ════════════════════════════════ -->
+<section class="module" id="m12">
+  <div class="module-inner">
+    <div class="module-header">
+      <div class="module-eyebrow">
+        <span class="module-num">Módulo 12 · Playbook Completo</span>
+        <span class="module-tag">Pré-qualificação · Prospecção · Reunião · Negociação · Fechamento · Objeções</span>
+        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+      </div>
+      <h2 class="module-title">Gestão de pessoas<br><em>e playbook</em></h2>
+      <p class="module-intro">Playbook é o que permite que o processo comercial funcione sem depender da memória, do humor ou da disponibilidade de uma única pessoa. É a inteligência do negócio documentada.</p>
+    </div>
+
+    <div class="quote">
+      <p>"Se o processo só funciona quando você está presente, você não tem um processo — você tem um talento. Talento não escala. Processo escala."</p>
+    </div>
+
+    <!-- HUNTER VS FARMER -->
+    <div class="section">
+      <h3 class="section-title">Perfis de vendedor — Hunter e Farmer</h3>
+      <div class="cards-2">
+        <div class="card">
+          <div class="card-label">🏹 Hunter — Caçador</div>
+          <div class="card-title">Especialista em abrir portas</div>
+          <div class="card-text">Prospecto ativo, alta tolerância a rejeição, orientado a resultado de curto prazo, energizado pela conquista. Ideal para: prospecção ativa, abertura de novos mercados, outbound.<br><br><strong>Sinais no processo seletivo:</strong> fala de metas batidas com orgulho, tem histórico em vendas outbound, não tem medo de fazer ligação fria.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">🌱 Farmer — Cultivador</div>
+          <div class="card-title">Especialista em expandir relacionamentos</div>
+          <div class="card-text">Gestão de carteira, upsell e cross-sell, relacionamento de longo prazo, orientado a LTV. Ideal para: customer success, expansão de contas, renovação.<br><br><strong>Sinais no processo seletivo:</strong> fala de relacionamentos construídos, tem histórico em gestão de contas, energizado pela fidelização.</div>
+        </div>
+      </div>
+      <div class="callout callout-warn">
+        <strong>⚠️ O erro mais comum</strong>
+        Colocar um Farmer para prospectar é frustrante para os dois lados. Colocar um Hunter em gestão de conta é um desperdício de talento e um risco para o cliente. Contrate para o perfil da função, não para o perfil genérico de "bom vendedor".
+      </div>
+    </div>
+
+    <!-- RAMP-UP -->
+    <div class="section">
+      <h3 class="section-title">Plano de ramp-up — 30 dias para performar</h3>
+      <h4>Semana 1 — Imersão no produto e no processo</h4>
+      <ul class="checklist">
+        <li>Leitura completa deste material (Módulos 1 a 12)</li>
+        <li>Sombra em 3 reuniões de diagnóstico (ouvindo, não participando)</li>
+        <li>Estudo dos 5 clientes mais recentes — qual era a dor, o que foi proposto, o que foi entregue</li>
+        <li>Memorização dos scripts de prospecção por canal</li>
+        <li>Configuração do CRM e do acesso às ferramentas</li>
+      </ul>
+      <h4>Semana 2 — Primeiros contatos supervisionados</h4>
+      <ul class="checklist">
+        <li>Envio de 20 mensagens de prospecção com revisão prévia do gestor</li>
+        <li>Roleplay de reunião de diagnóstico com o gestor (pelo menos 2 vezes)</li>
+        <li>Análise dos scripts que funcionaram e dos que não funcionaram</li>
+        <li>Primeira reunião de diagnóstico real — com gestor presente</li>
+      </ul>
+      <h4>Semanas 3 e 4 — Autonomia com acompanhamento</h4>
+      <ul class="checklist">
+        <li>Pipeline de 10+ leads ativos sob sua gestão</li>
+        <li>Primeira proposta enviada — revisada antes do envio</li>
+        <li>Reunião de 1:1 diária de 15 min com o gestor</li>
+        <li>Meta: 1 diagnóstico por semana, 1 proposta enviada até D30</li>
+      </ul>
+    </div>
+
+    <!-- RITUAIS -->
+    <div class="section">
+      <h3 class="section-title">Rituais de gestão — Daily e Roleplay</h3>
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">01</span><span class="playbook-header-title">Daily comercial — 15 minutos, todo dia às 9h</span></div>
+        <div class="playbook-body">
+          <p class="section-text">A Daily não é reunião de cobrança — é alinhamento de prioridades. Pauta fixa:</p>
+          <ul class="checklist">
+            <li>O que cada vendedor vai fazer hoje (prospecções, follow-ups, reuniões)</li>
+            <li>Qual lead está travado e precisa de ajuda</li>
+            <li>Uma aprendizagem da semana — o que funcionou ou não funcionou</li>
+          </ul>
+          <div class="callout callout-gold" style="margin-top:1rem;"><strong>Regra da Daily:</strong> ninguém sai sem saber exatamente o que vai fazer nas próximas 8 horas. Vago não vale.</div>
+        </div>
+      </div>
+
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">02</span><span class="playbook-header-title">Roleplay — simulação semanal, 30 minutos</span></div>
+        <div class="playbook-body">
+          <p class="section-text">Roleplay é a prática deliberada que melhora performance mais rápido do que qualquer treinamento teórico. O vendedor que pratica em ambiente seguro erra menos em ambiente real.</p>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Escolha 1 situação específica</div><div class="step-text">Não tente simular a venda inteira. Foque num momento: a abertura, uma objeção específica, o fechamento, o termômetro de 0 a 10.</div></div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">O gestor faz o papel de cliente difícil</div><div class="step-text">Simule o lead mais difícil que o vendedor vai encontrar — não o mais fácil. Pressione nos pontos de vulnerabilidade.</div></div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Feedback específico imediatamente depois</div><div class="step-text">2 coisas que funcionaram + 1 coisa que pode melhorar. Feedback genérico ("foi bem!") não desenvolve ninguém.</div></div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Repita até ficar natural</div><div class="step-text">O mesmo momento pelo menos 2 vezes. Na segunda vez, o vendedor já sabe o que vai enfrentar — mas o objetivo é o natural, não o decorado.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLAYBOOK DETALHADO -->
+    <div class="section">
+      <h3 class="section-title">Playbook operacional — o que fazer em cada situação</h3>
+
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">P1</span><span class="playbook-header-title">Pré-qualificação — antes de qualquer reunião</span></div>
+        <div class="playbook-body">
+          <p class="section-text">A pré-qualificação protege seu tempo e aumenta a taxa de conversão da reunião. Uma reunião com lead desqualificado é tempo perdido dos dois lados.</p>
+          <h4>Os 4 filtros obrigatórios</h4>
+          <div class="steps">
+            <div class="step"><div class="step-num">D</div><div class="step-content"><div class="step-title">Desafio — tem problema que você resolve?</div><div class="step-text">"O que está te impedindo de atingir [objetivo] e te fez buscar ajuda agora?" Se a pessoa não consegue nomear um problema específico, não há urgência real.</div></div></div>
+            <div class="step"><div class="step-num">I</div><div class="step-content"><div class="step-title">Investimento — tem orçamento?</div><div class="step-text">"Você já trabalhou com algum consultor para resolver isso, ou tem feito internamente?" O histórico revela maturidade de investimento — sem precisar perguntar o número diretamente.</div></div></div>
+            <div class="step"><div class="step-num">U</div><div class="step-content"><div class="step-title">Urgência — quer resolver agora?</div><div class="step-text">"Isso é algo que vocês estão tentando resolver agora ou ainda estão avaliando para mais na frente?" Sem urgência, você vai entrar numa cadência longa sem resultado.</div></div></div>
+            <div class="step"><div class="step-num">A</div><div class="step-content"><div class="step-title">Autoridade — é o decisor?</div><div class="step-text">"Como funciona a decisão de investimento em vocês — você decide sozinho ou envolve mais alguém?" Saber isso antes evita chegar no final da reunião e ouvir "preciso falar com o sócio".</div></div></div>
+          </div>
+          <div class="script-block">
+            <div class="script-label">Script de ligação de pré-qualificação</div>
+            <div class="script-text">"Oi [nome]! Prefiro fazer uma ligação rápida do que esse vai e vem de mensagem — assim a gente resolve tudo de uma vez. Me conta mais sobre o que está acontecendo no comercial de vocês."
+
+[Após ouvir:] "Com base no que você me trouxe, faz sentido marcarmos uma conversa mais aprofundada — uma reunião de diagnóstico de uns 40 minutos onde eu entendo o processo de vocês e saio com uma devolutiva clara. Quando você tem disponibilidade?"
+
+[Antes de confirmar:] "Como na reunião vamos falar sobre uma proposta comercial, quem mais precisa estar presente para a decisão?"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">P2</span><span class="playbook-header-title">Novo seguidor no Instagram — o que fazer</span></div>
+        <div class="playbook-body">
+          <p class="section-text">Novo seguidor é uma oportunidade de abrir conversa — não de vender. A abordagem errada aqui queima o lead antes de ele esquentar.</p>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Espere ele interagir primeiro (opcional)</div><div class="step-text">Se ele curtiu, comentou ou assistiu um stories depois de seguir — use isso como gancho. É muito mais natural do que entrar em contato no vácuo.</div></div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Pesquise o perfil antes de mandar mensagem</div><div class="step-text">Bio, empresa, cargo, posts recentes. Você precisa de pelo menos 1 elemento específico para que a mensagem não pareça automática.</div></div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Mande a mensagem de boas-vindas estratégica</div><div class="step-text">O objetivo é abrir conversa — não fechar venda. Termine sempre com uma pergunta aberta fácil de responder.</div></div></div>
+          </div>
+          <div class="script-block">
+            <div class="script-label">Script — novo seguidor sem interação prévia</div>
+            <div class="script-text">"Oi [nome]! Vi que chegou por aqui recentemente — bem-vinda! Aqui falamos muito sobre processo comercial e estruturação de vendas. Pelo que vi no seu perfil, você está à frente de [empresa/área] — é isso? Fico curiosa: o que te trouxe até o perfil?"</div>
+          </div>
+          <div class="script-block">
+            <div class="script-label">Script — novo seguidor que curtiu um post específico</div>
+            <div class="script-text">"Oi [nome]! Vi que você curtiu o post sobre [assunto] — esse tema aparece no dia a dia de vocês também ou foi mais por curiosidade no tema?"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">P3</span><span class="playbook-header-title">Prospecção da base — reativação de leads frios</span></div>
+        <div class="playbook-body">
+          <p class="section-text">Leads que pararam de responder não são necessariamente perdidos. Às vezes o timing estava errado, o orçamento não existia ou a prioridade mudou. Reativar é mais barato do que prospectar do zero.</p>
+          <h4>Critérios para reativar</h4>
+          <ul class="checklist">
+            <li>Lead teve interesse inicial mas parou de responder há 30–90 dias</li>
+            <li>Lead disse "não é o momento" sem dar uma razão definitiva</li>
+            <li>Lead foi perdido por preço mas o cenário dele pode ter mudado</li>
+            <li>Lead que você abordou há mais de 6 meses e nunca chegou a uma reunião</li>
+          </ul>
+          <div class="script-block">
+            <div class="script-label">Script de reativação direta</div>
+            <div class="script-text">"[Nome], vou ser direta: percebi que o contato esfriou e não sei o motivo. Não precisa de desculpa — só me diz se ainda faz sentido conversarmos ou se o momento mudou. Sua honestidade me ajuda mais do que o silêncio."</div>
+          </div>
+          <div class="script-block">
+            <div class="script-label">Script de reativação com novo gancho</div>
+            <div class="script-text">"Oi [nome], passando pra dar um oi. Desde que a gente conversou, [algo mudou — novo resultado de cliente, nova oferta, conteúdo relevante]. Isso pode mudar algo pro cenário de vocês?"</div>
+          </div>
+          <div class="script-block">
+            <div class="script-label">Script de reativação de base fria (6+ meses sem contato)</div>
+            <div class="script-text">"Oi [nome], faz um tempo desde a nossa última conversa. O [setor] mudou bastante nesses meses e percebi que muitas empresas no perfil de vocês estão enfrentando [desafio atual do mercado]. Isso está aparecendo aí também?"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">P4</span><span class="playbook-header-title">Lead que chegou via CTA no Instagram — como conduzir</span></div>
+        <div class="playbook-body">
+          <p class="section-text">Lead que veio de CTA já tem algum nível de interesse — mas isso não significa que está pronto para comprar. Ele precisa ser qualificado antes de receber uma proposta.</p>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Responda rápido — dentro de 2 horas</div><div class="step-text">Lead de inbound resfria rápido. A janela de maior engajamento é nas primeiras 2 horas após o contato. Quem demora perde para quem respondeu mais rápido.</div></div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Aplique RPQ antes de qualificar</div><div class="step-text">Reconheça o que trouxe ele até você, personalize com base no que ele disse e só então faça a pergunta de qualificação.</div></div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Qualifique nos 4 filtros por mensagem</div><div class="step-text">Você não precisa de um formulário. Com 3–4 mensagens você já sabe se tem Desafio, Investimento, Urgência e Autoridade.</div></div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Convide para a reunião de diagnóstico</div><div class="step-text">Não mande proposta por mensagem. "Com base no que você me trouxe, faz sentido a gente fazer uma conversa de diagnóstico de 30–40 minutos. Quando você tem disponibilidade?"</div></div></div>
+          </div>
+          <div class="script-block">
+            <div class="script-label">Script — resposta ao primeiro contato via Instagram</div>
+            <div class="script-text">"Oi [nome]! Que bom que chegou até aqui. [R] Faz sentido buscar isso agora — [P] pelo o que você me trouxe, parece que o desafio principal está em [X]. [Q] Me conta mais: o que está travando especificamente no processo de vocês hoje?"
+
+[Após qualificação:] "Com tudo isso que você me contou, fica claro que tem bastante coisa a mapear juntos. O próximo passo que faz sentido é uma reunião de diagnóstico de 40 minutos — eu entendo o processo de vocês e saio com uma devolutiva clara do que eu faria. Quando você tem disponibilidade essa semana?"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">P5</span><span class="playbook-header-title">Contornar objeções — guia completo por tipo</span></div>
+        <div class="playbook-body">
+          <p class="section-text">Toda objeção segue a mesma estrutura de resposta: <strong>validar → investigar → responder → confirmar</strong>. O que muda é o conteúdo da resposta. Use sempre o nome do lead ao validar — cria conexão e mostra que você ouviu.</p>
+
+          <h4>Objeções de preço e valor</h4>
+          <div class="script-block"><div class="script-label">"Está caro" / "Não tenho orçamento"</div><div class="script-text">"Entendo, [nome]. Me ajuda a entender — caro em relação a quê? [Após ouvir:] O que eu quero garantir que ficou claro é que o investimento de R$ [X] está sendo comparado com R$ [impacto] que você me disse estar deixando na mesa por mês. O retorno acontece em [prazo]. Isso muda a perspectiva?"</div></div>
+
+          <h4>Objeções de timing</h4>
+          <div class="script-block"><div class="script-label">"Não é o momento" / "Vou deixar para o próximo mês"</div><div class="script-text">"Faz sentido, [nome]. Posso te fazer uma pergunta? Esse desafio existe há quanto tempo? [Após ouvir:] Então já são [X meses] com esse problema. O que muda no próximo mês que vai criar o momento certo? Se tiver algo concreto, eu espero com prazer. Se não tiver, pode ser que o momento nunca apareça sozinho."</div></div>
+
+          <h4>Objeções de decisão</h4>
+          <div class="script-block"><div class="script-label">"Preciso falar com meu sócio/diretoria"</div><div class="script-text">"Claro, faz todo sentido. Antes de encerrar — você pessoalmente está convencido que faz sentido? [Se sim:] Ótimo. Qual das duas opções funciona melhor: você apresenta o que conversamos, ou a gente marca uma call dos três juntos? Prefiro a segunda — assim eu respondo qualquer dúvida na hora."</div></div>
+
+          <h4>Objeções de confiança</h4>
+          <div class="script-block"><div class="script-label">"Não conheço seu trabalho" / "Já fiz consultoria e não funcionou"</div><div class="script-text">"Faz sentido ter esse receio, [nome] — especialmente se já teve uma experiência ruim. Me conta o que aconteceu — o que foi prometido e o que não veio? [Após ouvir:] O que você descreveu é exatamente o que acontece quando a consultoria entrega um documento mas não acompanha a implementação. O que eu faço diferente é [X concreto]. E por isso começo sempre com um diagnóstico — sem contrato, sem compromisso — para você ter clareza antes de decidir qualquer coisa."</div></div>
+
+          <h4>Objeções de DIY</h4>
+          <div class="script-block"><div class="script-label">"Vou tentar fazer internamente primeiro"</div><div class="script-text">"Faz sentido, [nome]. Me diz uma coisa — esse problema existe há quanto tempo? [Após ouvir:] Então você já tem [X meses] tentando internamente. O que mudou agora para dar certo? Às vezes o valor do suporte externo não é o conhecimento — é ter alguém com tempo e foco exclusivo para o que nunca sobe na lista de prioridades do dia a dia."</div></div>
+        </div>
+      </div>
+
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">P6</span><span class="playbook-header-title">Playbook de reunião, negociação e fechamento</span></div>
+        <div class="playbook-body">
+          <h4>Antes da reunião — preparação obrigatória</h4>
+          <ul class="checklist">
+            <li>Pesquise a empresa: site, LinkedIn, posts recentes, contratações</li>
+            <li>Revise o histórico de contato: o que foi conversado, qual dor foi mencionada</li>
+            <li>Prepare 2 perguntas de Implicação específicas para o setor</li>
+            <li>Confirme a reunião 24h antes: "Confirmando nossa conversa amanhã às [hora]. Alguma mudança?"</li>
+            <li>Verifique se o decisor vai estar presente</li>
+          </ul>
+
+          <h4>Na reunião — estrutura e comportamento</h4>
+          <div class="cadence">
+            <div class="cadence-item"><div class="cadence-day" style="font-size:0.6rem;">min 0–5</div><div class="cadence-content"><div class="cadence-label">Abertura e acordo de decisão</div><div class="cadence-text">Alinhe expectativas: "Meu objetivo aqui é entender o processo de vocês. No final, se fizer sentido, apresento o próximo passo. Pode ser assim?"</div></div></div>
+            <div class="cadence-item"><div class="cadence-day" style="font-size:0.6rem;">min 5–25</div><div class="cadence-content"><div class="cadence-label">Diagnóstico SPIN — o cliente fala 70%</div><div class="cadence-text">Faça as perguntas na sequência S → P → I → N. Anote os problemas com as palavras exatas do cliente. Não interrompa.</div></div></div>
+            <div class="cadence-item"><div class="cadence-day" style="font-size:0.6rem;">min 25–35</div><div class="cadence-content"><div class="cadence-label">Devolutiva e pitch conectado às dores</div><div class="cadence-text">"Com base no que você me contou..." — use as palavras dele. Conecte cada entregável a um problema específico que ele mencionou.</div></div></div>
+            <div class="cadence-item"><div class="cadence-day" style="font-size:0.6rem;">min 35–40</div><div class="cadence-content"><div class="cadence-label">Termômetro + investimento + fechamento</div><div class="cadence-text">Termômetro de 0 a 10. Se 8+: apresente o preço e fique em silêncio. Se abaixo: "O que faltou para chegar mais perto do 10?"</div></div></div>
+          </div>
+
+          <h4>Negociação — princípios que não mudam</h4>
+          <div class="callout callout-dark">
+            <strong>As 4 regras de ouro da negociação</strong>
+            1. Quem apresenta o preço primeiro e fica em silêncio tem mais poder. 2. Nunca dê concessão sem pedir algo em troca. 3. Se der desconto, reduza o escopo — nunca o preço puro. 4. Sempre ofereça duas opções — nunca uma.
+          </div>
+
+          <div class="script-block"><div class="script-label">Script — quando pedem desconto</div><div class="script-text">"Entendo que o investimento é relevante. Deixa eu te oferecer duas alternativas: posso manter o escopo completo no valor apresentado, ou posso reduzir para [R$ X] retirando [entregável específico]. O que faz mais sentido pro momento de vocês?"</div></div>
+
+          <h4>Fechamento — os momentos que definem</h4>
+          <div class="script-block"><div class="script-label">Fechamento por alternativa — o mais natural</div><div class="script-text">"Qual das duas opções faz mais sentido para vocês — a A ou a B?" [Silêncio absoluto. Não fale mais nada até o lead responder.]</div></div>
+          <div class="script-block"><div class="script-label">Quando o lead diz "preciso pensar"</div><div class="script-text">"Faz sentido. Posso te perguntar uma coisa? Quando você diz que precisa pensar — o que especificamente está pesando mais? Quero entender para ver se consigo te ajudar a clarear agora."</div></div>
+          <div class="script-block"><div class="script-label">Quando o lead some após a proposta</div><div class="script-text">"[Nome], estava organizando as conversas e vi que essa ficou sem resposta — ela se perdeu aí também? Se o cenário mudou, me diz que entendo. Se ainda está em avaliação, posso ajudar a tirar alguma dúvida."</div></div>
+        </div>
+      </div>
+
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">P7</span><span class="playbook-header-title">Lead via inbound — o que fazer quando chega</span></div>
+        <div class="playbook-body">
+          <p class="section-text">Lead de inbound tem menor fricção para iniciar conversa — mas isso não significa que está qualificado. O processo é o mesmo: qualificar antes de agendar, agendar antes de propor.</p>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Responda em até 2 horas</div><div class="step-text">Taxa de conversão cai drasticamente quando a resposta demora mais de 2 horas. Configure alertas de DM e monitore durante o horário comercial.</div></div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Identifique de onde veio</div><div class="step-text">CTA de qual post? Bio? Indicação? Isso muda o contexto da conversa e mostra que você prestou atenção.</div></div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Aplique RPQ + qualificação em 3–4 mensagens</div><div class="step-text">Não tente resolver tudo por mensagem. O objetivo é entender o suficiente para saber se vale agendar — e agendar.</div></div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Convide para diagnóstico — com hora marcada</div><div class="step-text">Não "qualquer horário que for bom para você". Ofereça 2 opções específicas: "Tenho disponibilidade quinta às 14h ou sexta às 10h — qual funciona melhor?"</div></div></div>
+            <div class="step"><div class="step-num">5</div><div class="step-content"><div class="step-title">Confirme 24h antes e verifique o decisor</div><div class="step-text">"Confirmando nossa conversa amanhã às [hora]. Vai conseguir estar presente com [sócio/diretor] também ou só vocês dois?"</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="playbook-section">
+        <div class="playbook-header"><span class="playbook-header-num">P8</span><span class="playbook-header-title">Prospecção ativa fria — por canal</span></div>
+        <div class="playbook-body">
+          <p class="section-text">Prospecção ativa fria exige mais energia mas gera resultado mais rápido. O segredo é volume com personalização mínima — não personalização máxima com volume zero.</p>
+
+          <h4>WhatsApp frio</h4>
+          <div class="script-block"><div class="script-label">Regras de ouro</div><div class="script-text">1. Nunca mande áudio no primeiro contato.
+2. Máximo 4 linhas na primeira mensagem.
+3. Sempre termine com uma pergunta aberta fácil.
+4. Nunca pitch na primeira mensagem — abra conversa.
+5. Se não responder em 48h, mande 1 follow-up de quebra de padrão.</div></div>
+
+          <h4>E-mail frio</h4>
+          <div class="script-block"><div class="script-label">Estrutura que funciona</div><div class="script-text">Assunto: [dado específico sobre eles — não genérico]
+Linha 1: dado que você pesquisou sobre a empresa.
+Linha 2: conexão com uma dor comum do setor.
+Linha 3: o que você faz — em 1 frase.
+Linha 4: 1 pergunta que eles podem responder em 10 segundos.
+
+Sem: "Espero que este e-mail te encontre bem." Sem: "Somos líderes em..." Sem: parágrafo longo.</div></div>
+
+          <h4>Instagram (DM fria)</h4>
+          <div class="script-block"><div class="script-label">Sequência de abordagem</div><div class="script-text">Dia 1: Siga o perfil e curta 2–3 posts (mostra que existe antes de entrar em contato).
+Dia 2 ou 3: Mande a DM com gancho específico do perfil deles.
+Se não responder em 3 dias: 1 comentário estratégico em post recente.
+Se não responder após o comentário: encerre ou tente outro canal.</div></div>
+
+          <h4>LinkedIn (DM fria)</h4>
+          <div class="script-block"><div class="script-label">Sequência de abordagem</div><div class="script-text">Passo 1: Connecte com nota personalizada (máx. 300 caracteres).
+Passo 2: Após aceitar, espere 24–48h antes de mandar mensagem.
+Passo 3: 1ª mensagem — curiosidade genuína, sem pitch.
+Passo 4: Se responder mas não avançar — follow-up em 5 dias com valor (insight, dado, conteúdo relevante).
+Passo 5: Se não responder em 7 dias do follow-up — encerre esse lead no LinkedIn e tente e-mail.</div></div>
+
+          <h4>Ligação fria</h4>
+          <div class="script-block"><div class="script-label">Script de abertura de ligação (30 segundos)</div><div class="script-text">"Oi [nome], aqui é [seu nome], da Lune Co. Tenho 30 segundos para te explicar por que liguei — posso?
+
+[Após sim:] Trabalho com estruturação comercial para empresas de [segmento]. Vi o perfil de vocês e parece que estão num momento onde [observação específica]. Queria entender se isso faz sentido ou se estou completamente errada. Tenho 5 minutos?"</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Como documentar o Playbook — o que não pode faltar</h3>
+      <p class="section-text">Playbook documentado é o que permite que o processo funcione sem depender de quem o criou. Ele precisa ser simples o suficiente para ser lido — e específico o suficiente para ser seguido.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Seção</th><th>O que documenta</th><th>Formato recomendado</th></tr></thead>
+          <tbody>
+            <tr><td><strong>ICP</strong></td><td>Perfil do cliente ideal com exemplos reais</td><td>Página única com critérios e anti-critérios</td></tr>
+            <tr><td><strong>Pipeline</strong></td><td>Etapas, critérios de entrada e probabilidade</td><td>Tabela + print do CRM configurado</td></tr>
+            <tr><td><strong>Scripts por canal</strong></td><td>Scripts de prospecção, follow-up, objeções</td><td>Documento por canal (WhatsApp, LinkedIn, e-mail)</td></tr>
+            <tr><td><strong>Roteiro de reunião</strong></td><td>Estrutura e perguntas do diagnóstico</td><td>Guia de 1 página para o vendedor levar</td></tr>
+            <tr><td><strong>Mapa de objeções</strong></td><td>Top 7 objeções e scripts de resposta</td><td>Tabela rápida de consulta</td></tr>
+            <tr><td><strong>Cadência de follow-up</strong></td><td>D0, D2, D5, D10, D21 com scripts</td><td>Timeline visual</td></tr>
+            <tr><td><strong>Rituais de gestão</strong></td><td>Pauta de daily, 1:1 e review mensal</td><td>Template de pauta fixo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="takeaways">
+      <div class="takeaways-label">✦ O que levar deste módulo</div>
+      <ul class="takeaways-list">
+        <li><strong>Playbook não é burocracia — é liberdade.</strong> Quando o processo está documentado, você pode sair de férias sem o negócio parar.</li>
+        <li><strong>Hunter prospecto, Farmer expande.</strong> Contratar o perfil errado para a função certa é o erro mais caro que uma empresa de vendas comete.</li>
+        <li><strong>Roleplay semanal vale mais do que treinamento mensal.</strong> A prática deliberada em ambiente seguro é o que constrói habilidade de verdade.</li>
+        <li><strong>Playbook vivo — atualizado a cada aprendizagem.</strong> Não é um documento que você faz uma vez. É o registro do que o seu time aprende toda semana.</li>
+      </ul>
+    </div>
+
+    <div class="activity">
+      <div class="activity-label">✦ Atividade prática — Módulo 12</div>
+      <div class="activity-title">Comece o seu Playbook hoje — versão 1.0</div>
+      <p class="activity-text">Você não precisa documentar tudo de uma vez. Comece com o essencial e vá completando. Uma página por semana durante 4 semanas e você tem um playbook funcional.</p>
+      <ul>
+        <li>Semana 1: documente o ICP e o pipeline com critérios de entrada</li>
+        <li>Semana 2: escreva os scripts dos 3 canais que você mais usa</li>
+        <li>Semana 3: crie o roteiro de reunião e o mapa de objeções</li>
+        <li>Semana 4: monte a cadência de follow-up e os rituais de gestão</li>
+        <li>A cada aprendizagem nova: atualize o playbook — ele precisa refletir a realidade, não o ideal</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ RODAPÉ ════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-brand">Lune <span>Co.</span></div>
+  <p class="footer-tagline">O método está na apostila.<br><em>O resultado está na aplicação.</em></p>
+  <div class="footer-rule"></div>
+  <p class="footer-note">MÉTODO COMERCIAL · MATERIAL DE USO EXCLUSIVO DO CLIENTE · LUNE CO. CONSULTORIA COMERCIAL</p>
+</footer>
+
+</body>
+</html>
