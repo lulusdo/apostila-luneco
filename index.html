@@ -855,8 +855,11 @@
   }
 
   @media print {
-    .cover { page-break-after: always; }
-    .module { page-break-before: always; }
+    .cover { display: none; }
+    .toc { display: none; }
+    .footer { display: none; }
+    .module { display: none; }
+    .module.printing { display: block !important; }
     .print-btn { display: none; }
   }
 </style>
@@ -929,7 +932,7 @@
       <div class="module-eyebrow">
         <span class="module-num">Módulo 01 · Fundamentos</span>
         <span class="module-tag">Funil · Jornada · Métricas · Diagnóstico</span>
-        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+        <button class="print-btn" onclick="printModule(this)">Imprimir / salvar PDF</button>
       </div>
       <h2 class="module-title">Fundamentos do<br><em>processo comercial</em></h2>
       <p class="module-intro">Antes de qualquer script, tática ou ferramenta, você precisa entender como o processo comercial funciona do ponto de vista do cliente — e do seu. Esse módulo é a base de tudo que vem depois.</p>
@@ -1054,7 +1057,7 @@
       <div class="module-eyebrow">
         <span class="module-num">Módulo 02 · Prospecção</span>
         <span class="module-tag">ICP · Inbound · Outbound · Scripts</span>
-        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+        <button class="print-btn" onclick="printModule(this)">Imprimir / salvar PDF</button>
       </div>
       <h2 class="module-title">Prospecção e<br><em>geração de leads</em></h2>
       <p class="module-intro">Prospecção não é interromper alguém. É levar o problema certo para a pessoa certa no momento certo. Quem tem o problema e você não aparece — você está falhando com ela, não ajudando.</p>
@@ -1170,7 +1173,7 @@ Esse é um ponto que aparece aí também?
       <div class="module-eyebrow">
         <span class="module-num">Módulo 03 · Scripts</span>
         <span class="module-tag">Venda consultiva · SPIN · Scripts por etapa</span>
-        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+        <button class="print-btn" onclick="printModule(this)">Imprimir / salvar PDF</button>
       </div>
       <h2 class="module-title">Scripts de vendas e<br><em>abordagem consultiva</em></h2>
       <p class="module-intro">Venda consultiva não é uma técnica. É uma postura. Você não está tentando convencer ninguém — está ajudando alguém a tomar a melhor decisão para o negócio dele.</p>
@@ -1259,7 +1262,7 @@ Qual das duas faz mais sentido pro momento de vocês?"</div>
       <div class="module-eyebrow">
         <span class="module-num">Módulo 04 · Objeções e Fechamento</span>
         <span class="module-tag">Objeções · Cadência · Negociação · Fechamento</span>
-        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+        <button class="print-btn" onclick="printModule(this)">Imprimir / salvar PDF</button>
       </div>
       <h2 class="module-title">Objeções, follow-up<br><em>e fechamento</em></h2>
       <p class="module-intro">48% dos vendedores nunca fazem um segundo contato. 80% dos fechamentos acontecem entre o 5º e o 12º contato. Isso significa que quase metade das pessoas está competindo por 20% das vendas.</p>
@@ -1398,7 +1401,7 @@ Qual das duas faz mais sentido pro momento de vocês?"</div>
       <div class="module-eyebrow">
         <span class="module-num">Módulo 05 · Gestão</span>
         <span class="module-tag">KPIs · Pipeline · Forecast · Rituais</span>
-        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+        <button class="print-btn" onclick="printModule(this)">Imprimir / salvar PDF</button>
       </div>
       <h2 class="module-title">Gestão comercial<br><em>e métricas</em></h2>
       <p class="module-intro">Gestão comercial não é reunião para ver número. É o sistema que garante que o processo funciona mesmo quando você não está olhando. Quem gerencia só pelo resultado não sabe o que fazer quando ele cai.</p>
@@ -1487,7 +1490,7 @@ Qual das duas faz mais sentido pro momento de vocês?"</div>
       <div class="module-eyebrow">
         <span class="module-num">Módulo 06 · Processo Comercial</span>
         <span class="module-tag">Posicionamento · Esteira · Precificação · Autoridade</span>
-        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+        <button class="print-btn" onclick="printModule(this)">Imprimir / salvar PDF</button>
       </div>
       <h2 class="module-title">Construindo seu<br><em>processo comercial</em></h2>
       <p class="module-intro">Negócio sem processo é esforço sem retorno. A diferença entre crescer de forma consistente ou viver de picos e secas está em como você se posiciona, o que você vende e como cobra.</p>
@@ -1570,7 +1573,7 @@ Qual das duas faz mais sentido pro momento de vocês?"</div>
       <div class="module-eyebrow">
         <span class="module-num">Módulo 07 · Rotina</span>
         <span class="module-tag">Rotina por porte · Como ensinar · Checklists</span>
-        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+        <button class="print-btn" onclick="printModule(this)">Imprimir / salvar PDF</button>
       </div>
       <h2 class="module-title">Rotina<br><em>comercial</em></h2>
       <p class="module-intro">Processo sem rotina não existe na prática. Você pode ter o melhor script do mundo, o pipeline mais organizado, e tudo cair por terra se o vendedor não souber o que fazer das 9h às 18h.</p>
@@ -1646,7 +1649,7 @@ Qual das duas faz mais sentido pro momento de vocês?"</div>
       <div class="module-eyebrow">
         <span class="module-num">Módulo 08 · Scripts Avançados</span>
         <span class="module-tag">RPQ · DM · Pré-qualificação · Sessão estratégica · Downsell</span>
-        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+        <button class="print-btn" onclick="printModule(this)">Imprimir / salvar PDF</button>
       </div>
       <h2 class="module-title">Scripts avançados e<br><em>sessão estratégica</em></h2>
       <p class="module-intro">Saber o processo é uma coisa. Ter as palavras certas no momento certo é outra. Este módulo reúne os scripts práticos para cada situação — da primeira DM ao fechamento — e o roteiro completo da sessão estratégica.</p>
@@ -1757,7 +1760,7 @@ Qual das duas faz mais sentido pro momento de vocês?"</div>
       <div class="module-eyebrow">
         <span class="module-num">Módulo 09 · Canais de Aquisição</span>
         <span class="module-tag">Matriz de Canais · Outbound · Inbound · Parcerias</span>
-        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+        <button class="print-btn" onclick="printModule(this)">Imprimir / salvar PDF</button>
       </div>
       <h2 class="module-title">Canais de aquisição —<br><em>o motor de leads</em></h2>
       <p class="module-intro">Canal errado para o ICP errado é dinheiro e tempo jogados fora. O problema não é a falta de canal — é a falta de clareza sobre qual canal faz mais sentido para o seu ticket, o seu cliente e o momento do seu negócio.</p>
@@ -1884,7 +1887,7 @@ Faz sentido conversarmos 15 minutos essa semana?
       <div class="module-eyebrow">
         <span class="module-num">Módulo 10 · Pós-Venda e Expansão</span>
         <span class="module-tag">Upsell · Cross-sell · Régua 30/60/90 · Prova Social</span>
-        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+        <button class="print-btn" onclick="printModule(this)">Imprimir / salvar PDF</button>
       </div>
       <h2 class="module-title">Pós-venda e expansão —<br><em>o lucro real</em></h2>
       <p class="module-intro">A etapa mais lucrativa do processo comercial é a que a maioria ignora. Vender mais para quem já confia em você custa até 7 vezes menos do que adquirir um cliente novo — e gera indicações que fecham sem esforço.</p>
@@ -2023,7 +2026,7 @@ Faz sentido conversarmos 15 minutos essa semana?
       <div class="module-eyebrow">
         <span class="module-num">Módulo 11 · Tech Stack e IA</span>
         <span class="module-tag">IA no Comercial · CRM · Automação · Ferramentas</span>
-        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+        <button class="print-btn" onclick="printModule(this)">Imprimir / salvar PDF</button>
       </div>
       <h2 class="module-title">Tech stack e<br><em>inteligência artificial</em></h2>
       <p class="module-intro">Ferramenta não substitui processo. Mas a combinação certa de ferramentas com processo bem definido multiplica o que você consegue fazer sozinho — ou com um time pequeno.</p>
@@ -2123,7 +2126,7 @@ Faz sentido conversarmos 15 minutos essa semana?
       <div class="module-eyebrow">
         <span class="module-num">Módulo 12 · Playbook Completo</span>
         <span class="module-tag">Pré-qualificação · Prospecção · Reunião · Negociação · Fechamento · Objeções</span>
-        <button class="print-btn" onclick="window.print()">Imprimir / salvar PDF</button>
+        <button class="print-btn" onclick="printModule(this)">Imprimir / salvar PDF</button>
       </div>
       <h2 class="module-title">Gestão de pessoas<br><em>e playbook</em></h2>
       <p class="module-intro">Playbook é o que permite que o processo comercial funcione sem depender da memória, do humor ou da disponibilidade de uma única pessoa. É a inteligência do negócio documentada.</p>
@@ -2467,5 +2470,16 @@ Passo 5: Se não responder em 7 dias do follow-up — encerre esse lead no Linke
   <p class="footer-note">MÉTODO COMERCIAL · MATERIAL DE USO EXCLUSIVO DO CLIENTE · LUNE CO. CONSULTORIA COMERCIAL</p>
 </footer>
 
+<script>
+function printModule(btn) {
+  const module = btn.closest('.module');
+  module.classList.add('printing');
+  window.print();
+  window.addEventListener('afterprint', function handler() {
+    module.classList.remove('printing');
+    window.removeEventListener('afterprint', handler);
+  });
+}
+</script>
 </body>
 </html>
